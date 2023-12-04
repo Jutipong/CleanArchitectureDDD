@@ -12,7 +12,13 @@ public class CustomerEndpoint : CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/Create", async (ISender sender, CreateCustomerCommand2 req) =>
+        app.MapPost("/Create", async (ISender sender, CreateCustomerCommand req) =>
+        {
+            var result = await sender.Send(req);
+            return result;
+        });
+
+        app.MapPost("/Create2", async (ISender sender, CreateCustomerCommand2 req) =>
         {
             var result = await sender.Send(req);
             return result;
