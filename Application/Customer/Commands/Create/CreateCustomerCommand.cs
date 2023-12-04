@@ -8,9 +8,9 @@ public class CreateCustomerCommand : ICommand<Guid>
     public string Email { get; set; } = string.Empty;
 }
 
-public class validator : AbstractValidator<CreateCustomerCommand>
+public class Validator : AbstractValidator<CreateCustomerCommand>
 {
-    public validator()
+    public Validator()
     {
         RuleFor(r => r.Code).NotEmpty();
         RuleFor(r => r.Name).NotEmpty();

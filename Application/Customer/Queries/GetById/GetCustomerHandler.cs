@@ -2,7 +2,7 @@
 
 namespace Application.Customer.Queries.GetById;
 
-internal sealed class GetCustomerHandler : IQueryHandler<GetCustomerByIdQuery, Guid>
+internal sealed class GetCustomerHandler : IRequest<GetCustomerByIdQuery, Guid>
 {
     public async Task<Result<Guid>> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {

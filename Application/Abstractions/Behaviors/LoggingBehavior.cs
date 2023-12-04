@@ -1,5 +1,4 @@
-﻿using Application.Abstractions.Messaging;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Abstractions.Behaviors;
