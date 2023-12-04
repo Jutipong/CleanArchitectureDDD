@@ -1,4 +1,7 @@
-﻿using Carter;
+﻿using Application.Customer.Commands.Create;
+using Application.Customer.Queries.GetById;
+using Carter;
+using MediatR;
 
 namespace Api.Minimal.Endpoints;
 
@@ -11,14 +14,16 @@ public class Customer : CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/Create", () =>
+        app.MapPost("/Create", async (ISender sender, CreateCustomerCommand req) =>
         {
-            return Results.Content("Crate");
+            var result = await sender.Send(req);
+            return result;
         });
 
-        app.MapGet("/GetById", () =>
+        app.MapGet("/GetById/{id}", async (Guid id, ISender sender) =>
         {
-            return Results.Content("GetById");
+            var result = await sender.Send(new GetCustomerByIdQuery(id));
+            return result;
         });
     }
 }
