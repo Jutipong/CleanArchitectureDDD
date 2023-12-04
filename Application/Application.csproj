@@ -17,4 +17,12 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\code\CleanArchitectureDDD\Application\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\code\CleanArchitectureDDD\Application\.editorconfig" />
+  </ItemGroup>
+
 </Project>

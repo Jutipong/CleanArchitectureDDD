@@ -1,9 +1,9 @@
 ﻿namespace Domain.Dtos;
 public class CustomerDto
 {
-    Guid Id { get; set; }
-    string Name { get; set; }
-    string Code { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string Code { get; set; }
 }
 
 
