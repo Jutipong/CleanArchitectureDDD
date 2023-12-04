@@ -20,7 +20,7 @@ public class Customer : CarterModule
             return result;
         });
 
-        app.MapGet("/GetById/{id}", async (Guid id, ISender sender) =>
+        app.MapGet("/GetById/{id}", async (ISender sender, Guid id) =>
         {
             var result = await sender.Send(new GetCustomerByIdQuery(id));
             return result;
