@@ -1,7 +1,5 @@
 ﻿using Application.Customer.Commands.Create;
 using Application.Customer.Queries.GetById;
-using Carter;
-using MediatR;
 
 namespace Api.Minimal.Endpoints;
 
