@@ -1,5 +1,4 @@
 ﻿using Application.Abstractions.Exceptions;
-using MediatR;
 
 namespace Application.Abstractions.Behaviors;
 

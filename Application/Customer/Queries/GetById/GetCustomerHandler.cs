@@ -23,3 +23,4 @@ internal sealed class GetCustomerHandler : IQueryHandler<GetCustomerByIdQuery>
         return Result.Success(new CustomerEntities());
     }
 }
+
