@@ -1,10 +1,9 @@
-﻿using Domain.Abstractions;
-using Domain.Interfaces;
-using MediatR;
+﻿
+
 
 namespace Application.Customer.Queries.GetById;
 
-internal sealed class GetCustomerHandler : IRequest<Guid>
+internal sealed class GetCustomerHandler : IQueryHandler<GetCustomerByIdQuery>
 {
     private readonly ICustomerRepository _customerRepository;
 
@@ -13,15 +12,15 @@ internal sealed class GetCustomerHandler : IRequest<Guid>
         _customerRepository = customerRepository;
     }
 
-    public async Task<Result<Guid>> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _customerRepository.GetCustomerById(request.id);
+        var customer = await _customerRepository.GetCustomerById(request.id);
 
-        if (result is null)
+        if (customer is null)
         {
             return Result.Failure<Guid>(Error.NullValue);
         }
 
-        return result;
+        return Result.Success(customer);
     }
 }
