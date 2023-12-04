@@ -3,16 +3,16 @@ using Application.Customer.Queries.GetById;
 
 namespace Api.Minimal.Endpoints;
 
-public class Customer : CarterModule
+public class CustomerEndpoint : CarterModule
 {
-    public Customer() : base("customer")
+    public CustomerEndpoint() : base("customer")
     {
         WithTags("Customer");
     }
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/Create", async (ISender sender, CreateCustomerCommand req) =>
+        app.MapPost("/Create", async (ISender sender, CreateCustomerCommand2 req) =>
         {
             var result = await sender.Send(req);
             return result;
