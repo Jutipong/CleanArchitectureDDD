@@ -48,3 +48,19 @@ This layer is a web api application based on ASP.NET 6.0.x. This layer depends o
 ### Logs
 
 Logging into Elasticsearch using Serilog and viewing logs in Kibana.
+
+### Interface info Application
+
+1
+1.1 IQueryHandler<TQuery> 
+1.2 ICommandHandler<TCommand>
+
+```bash
+{
+    "IsSuccess": true,
+    "IsFailure": false,
+    "Error": {
+        "Code": "",
+        "Message": ""
+    }
+}
