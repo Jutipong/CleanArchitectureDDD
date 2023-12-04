@@ -2,14 +2,14 @@
 
 namespace Application.Abstractions.Messaging;
 
-public interface ICommand : MediatR.IRequest<Result>, IBaseCommand
+public interface IValidate : MediatR.IRequest<Result>, IValidateBase
 {
 }
 
-public interface ICommand<TResponse> : MediatR.IRequest<Result<TResponse>>, IBaseCommand
+public interface IValidate<TResponse> : MediatR.IRequest<Result<TResponse>>, IValidateBase
 {
 }
 
-public interface IBaseCommand
+public interface IValidateBase
 {
 }

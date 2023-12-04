@@ -5,7 +5,7 @@ namespace Application.Abstractions.Behaviors;
 
 public class LoggingBehavior<TRequest, TResponse>(ILogger<TRequest> logger)
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+    where TRequest : IValidateBase
 {
     private readonly ILogger<TRequest> _logger = logger;
 

@@ -4,12 +4,12 @@ using MediatR;
 namespace Application.Abstractions.Messaging;
 
 public interface IRequest<TCommand> : IRequestHandler<TCommand, Result>
-    where TCommand : ICommand
+    where TCommand : IValidate
 {
 }
 
 public interface IRequest<TCommand, TResponse> : IRequestHandler<TCommand, Result<TResponse>>
-    where TCommand : ICommand<TResponse>
+    where TCommand : IValidate<TResponse>
 {
 }
 

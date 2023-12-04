@@ -1,13 +1,11 @@
 ﻿using Application.Abstractions.Exceptions;
-using Application.Abstractions.Messaging;
-using FluentValidation;
 using MediatR;
 
 namespace Application.Abstractions.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+    where TRequest : IValidateBase
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 

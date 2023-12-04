@@ -1,6 +1,6 @@
 ﻿namespace Application.Customer.Commands.Create;
 
-public class CreateCustomerCommand : ICommand<Guid>
+public class CreateCustomerCommand : IValidate<Guid>
 {
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
@@ -8,9 +8,9 @@ public class CreateCustomerCommand : ICommand<Guid>
     public string Email { get; set; } = string.Empty;
 }
 
-public class Validator : AbstractValidator<CreateCustomerCommand>
+public class Validate : AbstractValidator<CreateCustomerCommand>
 {
-    public Validator()
+    public Validate()
     {
         RuleFor(r => r.Code).NotEmpty();
         RuleFor(r => r.Name).NotEmpty();
