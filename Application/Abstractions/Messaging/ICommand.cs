@@ -1,15 +1,16 @@
 ﻿using Domain.Abstractions;
+using MediatR;
 
 namespace Application.Abstractions.Messaging;
 
-public interface IValidate : MediatR.IRequest<Result>, IValidateBase
+public interface ICommand : IRequest<Result>, IBaseCommand
 {
 }
 
-public interface IValidate<TResponse> : MediatR.IRequest<Result<TResponse>>, IValidateBase
+public interface ICommand<TReponse> : IRequest<Result<TReponse>>, IBaseCommand
 {
 }
 
-public interface IValidateBase
+public interface IBaseCommand
 {
 }

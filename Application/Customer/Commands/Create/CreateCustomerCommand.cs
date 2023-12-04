@@ -1,6 +1,6 @@
 ﻿namespace Application.Customer.Commands.Create;
 
-public class CreateCustomerCommand : IValidate<Guid>
+public class CreateCustomerCommand : ICommand<Guid>
 {
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;

@@ -1,6 +1,11 @@
-﻿namespace Domain.Interfaces;
+﻿using Domain.Dtos;
+
+namespace Domain.Interfaces;
 
 public interface ICustomerRepository
 {
-    Task<Guid> GetCustomerById(Guid id);
+    Task<CustomerEntities> CreateCustomer(CustomerDto customer);
+    Task<Guid?> GetCustomerById(Guid id);
 }
+
+
