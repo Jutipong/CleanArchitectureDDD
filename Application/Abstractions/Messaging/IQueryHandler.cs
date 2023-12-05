@@ -1,7 +1,7 @@
 ﻿namespace Application.Abstractions.Messaging;
 
 public interface IQueryHandler<TQuery> : IRequestHandler<TQuery, Result>
-    where TQuery : IRequest<Result>, IBaseCommand
+    where TQuery : IRequest<Result>, IBaseQuery
 {
 }
 
