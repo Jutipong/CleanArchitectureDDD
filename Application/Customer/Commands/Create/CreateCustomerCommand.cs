@@ -16,21 +16,3 @@ public class Validate : AbstractValidator<CreateCustomerCommand>
         RuleFor(r => r.Name).NotEmpty();
     }
 }
-
-
-public class CreateCustomerCommand2 : IRequest<CustomerEntities2>
-{
-    public string Code { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public int Age { get; set; } = 99;
-    public string Email { get; set; } = string.Empty;
-}
-
-public class Validate2 : AbstractValidator<CreateCustomerCommand2>
-{
-    public Validate2()
-    {
-        RuleFor(r => r.Code).NotEmpty();
-        RuleFor(r => r.Name).NotEmpty();
-    }
-}

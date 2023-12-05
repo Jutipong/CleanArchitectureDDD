@@ -1,10 +1,10 @@
 ﻿
 namespace Application.Customer.Queries.Search;
 
-internal sealed class SearchCustomerHandler : IQueryHandler<SearchCustomerQuery, CustomerEntities>
+internal sealed class SearchCustomerHandler : IRequestHandler<SearchCustomerQuery, CustomerEntities>
 {
-    public Task<Result<CustomerEntities>> Handle(SearchCustomerQuery request, CancellationToken cancellationToken)
+    public Task<CustomerEntities> Handle(SearchCustomerQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(new CustomerEntities());
     }
 }

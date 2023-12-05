@@ -24,13 +24,3 @@ internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomerComm
         return Result.Success(new CustomerEntities());
     }
 }
-
-
-// return แบบที่ 2
-internal sealed class CreateCustomerHandler2 : IRequestHandler<CreateCustomerCommand2, CustomerEntities2>
-{
-    public Task<CustomerEntities2> Handle(CreateCustomerCommand2 request, CancellationToken cancellationToken)
-    {
-        return Task.FromResult(new CustomerEntities2());
-    }
-}
