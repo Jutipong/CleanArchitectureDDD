@@ -5,8 +5,8 @@ set dbname=CallVerification_Test
 set user=sa
 set password=p@ssw0rd
 
-set context_name_space=Infrastructure.Databases.SqlServer
 set context_dir=.\Databases\SqlServer
+set context_name_space=Infrastructure.Databases.SqlServer
 set context_name=SqlContext
 
 set output_dir=..\Domain\Entities
