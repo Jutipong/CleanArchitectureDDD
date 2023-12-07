@@ -1,11 +1,12 @@
-﻿using Domain.Dtos;
+﻿using Domain.Entities;
 
 namespace Domain.Interfaces;
 
 public interface ICustomerRepository
 {
-    Task<CustomerEntities> CreateCustomer(CustomerDto customer);
-    Task<Guid?> GetCustomerById(Guid id);
+    void CreateCustomer(Customer customer, CancellationToken cancellationToken);
+    Task<List<Customer>> GetCustomerById(Guid id, CancellationToken cancellationToken);
+    Task<List<Customer>> Inquiry(string Name, CancellationToken cancellationToken);
 }
 
 
