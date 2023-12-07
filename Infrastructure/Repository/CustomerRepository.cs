@@ -32,7 +32,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     public async Task<List<Customer>> GetCustomerById(Guid id, CancellationToken cancellationToken)
     {
         List<Customer> customers = await _db.Customer
-            .Where(x => x.Id == id)
+            .Where(x => x.ID == id)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
