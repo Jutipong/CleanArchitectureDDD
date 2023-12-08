@@ -1,26 +1,20 @@
 ﻿namespace Application.Customer.Commands.Create;
 
-// return แบบที่ 1
 internal sealed class CreateCustomerHandler : ICommandHandler<CreateCustomerCommand>
 {
-    //private readonly ICustomerRepository _customerRepository;
+    private readonly ICustomerRepository _customerRepository;
 
-    //public CreateCustomerHandler(ICustomerRepository customerRepository)
-    //{
-    //    _customerRepository = customerRepository;
-    //}
+    public CreateCustomerHandler(ICustomerRepository customerRepository)
+    {
+        _customerRepository = customerRepository;
+    }
 
     public async Task<Result> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
-        //var obj = request.Adapt<CustomerDto>();
-        //var customer = await _customerRepository.CreateCustomer(obj);
-        //if (customer != null)
-        //{
-        //    return Result.Failure(Error.NullValue);
-        //}
+        var customerId = await _customerRepository.CreateCustomer(
+            request.Adapt<Entities.Customer>(),
+            cancellationToken);
 
-        //return Result.Success(customer);
-
-        return Result.Success(new CustomerEntities());
+        return Result.Success(customerId);
     }
 }

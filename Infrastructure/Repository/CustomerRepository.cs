@@ -14,9 +14,11 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         _db = db;
     }
 
-    public async void CreateCustomer(Customer customer, CancellationToken cancellationToken)
+    public async Task<Guid> CreateCustomer(Customer customer, CancellationToken cancellationToken)
     {
         await _db.Customer.AddAsync(customer, cancellationToken);
+
+        return customer.ID;
     }
 
     public async Task<List<Customer>> Inquiry(string Name, CancellationToken cancellationToken)
@@ -37,5 +39,16 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
             .ToListAsync(cancellationToken);
 
         return customers;
+    }
+
+    public void UpdateCustomer(Customer customer)
+    {
+        _db.Update(customer);
+    }
+
+    public void DelteCustomer(Guid id, CancellationToken cancellationToken)
+    {
+        var del = _db.Customer.FirstOrDefaultAsync(customer => customer.ID == id, cancellationToken);
+        _db.Remove(del);
     }
 }

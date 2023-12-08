@@ -1,3 +1,3 @@
 ﻿namespace Application.Customer.Commands.Delete;
 
-public record DeleteCustomerCommand(Guid id) : ICommand<Guid>;
+public record DeleteCustomerCommand(Guid id) : ICommand;

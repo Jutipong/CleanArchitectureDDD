@@ -2,9 +2,7 @@
 
 namespace Application.Abstractions.Behaviors;
 
-public class LoggingBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IBaseCommand
 {
     private readonly ILogger<TRequest> _logger;
 
@@ -13,10 +11,7 @@ public class LoggingBehavior<TRequest, TResponse>
         _logger = logger;
     }
 
-    public async Task<TResponse> Handle(
-        TRequest request,
-        RequestHandlerDelegate<TResponse> next,
-        CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         var name = request.GetType().Name;
 
@@ -30,7 +25,7 @@ public class LoggingBehavior<TRequest, TResponse>
 
             return result;
         }
-        catch (Exception exception)
+        catch(Exception exception)
         {
             _logger.LogError(exception, "Command {Command} processing failed", name);
 

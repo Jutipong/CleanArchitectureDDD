@@ -3,7 +3,6 @@ using Application.Customer.Commands.Delete;
 using Application.Customer.Commands.Update;
 using Application.Customer.Queries.GetById;
 using Application.Customer.Queries.Inquiry;
-using Application.Customer.Queries.Search;
 
 namespace Api.Minimal.Endpoints;
 
@@ -41,12 +40,6 @@ public class CustomerEndpoint : CarterModule
         });
 
         app.MapPost("/Inquiry", async (ISender sender, InquiryCustomerQuery req) =>
-        {
-            var result = await sender.Send(req);
-            return result;
-        });
-
-        app.MapPost("/Search", async (ISender sender, SearchCustomerQuery req) =>
         {
             var result = await sender.Send(req);
             return result;

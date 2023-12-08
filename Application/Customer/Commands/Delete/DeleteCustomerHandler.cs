@@ -1,10 +1,19 @@
 ﻿
 
 namespace Application.Customer.Commands.Delete;
-public record DeleteCustomerHandler : ICommandHandler<DeleteCustomerCommand, Guid>
+public record DeleteCustomerHandler : ICommandHandler<DeleteCustomerCommand>
 {
-    public Task<Result<Guid>> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
+    private readonly ICustomerRepository _customerRepository;
+
+    public DeleteCustomerHandler(ICustomerRepository customerRepository)
     {
-        return Task.FromResult(Result.Success(request.id));
+        _customerRepository = customerRepository;
+    }
+
+    public Task<Result> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
+    {
+        _customerRepository.DelteCustomer(request.id, cancellationToken);
+
+        return Task.FromResult(Result.Success());
     }
 }
