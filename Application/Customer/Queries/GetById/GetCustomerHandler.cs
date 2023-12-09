@@ -1,6 +1,7 @@
 ﻿namespace Application.Customer.Queries.GetById;
 
-internal sealed class GetCustomerHandler(ICustomerRepository customerRepository) : IQueryHandler<GetCustomerByIdQuery>
+internal sealed class GetCustomerHandler(ICustomerRepository customerRepository)
+    : IRequestHandlerResult<GetCustomerByIdQuery>
 {
     public async Task<Result> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {

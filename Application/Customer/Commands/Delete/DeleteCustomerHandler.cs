@@ -1,7 +1,7 @@
 ﻿
 
 namespace Application.Customer.Commands.Delete;
-public record DeleteCustomerHandler : ICommandHandler<DeleteCustomerCommand>
+public record DeleteCustomerHandler : IRequestHandlerResult<DeleteCustomerCommand>
 {
     private readonly ICustomerRepository _customerRepository;
 

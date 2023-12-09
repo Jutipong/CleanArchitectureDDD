@@ -4,7 +4,7 @@ namespace Application.Abstractions.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+    where TRequest : ICommandBaseCustom
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 

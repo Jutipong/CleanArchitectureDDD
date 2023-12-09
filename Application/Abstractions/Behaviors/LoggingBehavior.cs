@@ -2,7 +2,7 @@
 
 namespace Application.Abstractions.Behaviors;
 
-public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IBaseCommand
+public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : ICommandBaseCustom
 {
     private readonly ILogger<TRequest> _logger;
 

@@ -1,7 +1,7 @@
 ﻿
 
 namespace Application.Customer.Queries.Inquiry;
-internal class InquiryCustomerHandler : IQueryHandler<InquiryCustomerQuery>
+internal class InquiryCustomerHandler : IRequestHandlerResult<InquiryCustomerQuery>
 {
     private readonly ICustomerRepository _customerRepository;
 

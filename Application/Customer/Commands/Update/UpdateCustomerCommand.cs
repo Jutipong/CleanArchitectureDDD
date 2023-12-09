@@ -1,6 +1,6 @@
 ﻿namespace Application.Customer.Commands.Update;
 
-public class UpdateCustomerCommand : ICommand
+public class UpdateCustomerCommand : IRequestResult
 {
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;

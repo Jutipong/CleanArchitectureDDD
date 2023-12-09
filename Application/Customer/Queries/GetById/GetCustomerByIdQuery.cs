@@ -1,6 +1,6 @@
 ﻿namespace Application.Customer.Queries.GetById;
 
-public record GetCustomerByIdQuery(Guid id) : IQuery;
+public record GetCustomerByIdQuery(Guid id) : IRequestResult;
 
 public class Validate : AbstractValidator<GetCustomerByIdQuery>
 {
