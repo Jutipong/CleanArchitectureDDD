@@ -46,7 +46,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         _db.Update(customer);
     }
 
-    public void DelteCustomer(Guid id, CancellationToken cancellationToken)
+    public void DeleteCustomer(Guid id, CancellationToken cancellationToken)
     {
         var del = _db.Customer.FirstOrDefaultAsync(customer => customer.ID == id, cancellationToken);
         _db.Remove(del);
