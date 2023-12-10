@@ -4,7 +4,7 @@
             "name": "Api.Minimal",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/Api.Minimal/Api.Minimal.csproj",
+            "projectPath": "${workspaceFolder}\\Api.Minimal\\Api.Minimal.csproj",
             "launchConfigurationId": "TargetFramework=;https-vscode",
         },
     ]
