@@ -21,10 +21,10 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         return customer.ID;
     }
 
-    public async Task<List<Customer>> Inquiry(string Name, CancellationToken cancellationToken)
+    public async Task<List<Customer>> Inquiry(string name, CancellationToken cancellationToken)
     {
         var customers = await _db.Customer
-             .Where(customer => string.IsNullOrWhiteSpace(Name) || Name.Contains(customer.Name!))
+             .Where(customer => string.IsNullOrWhiteSpace(name) || name.Contains(customer.Name!))
              .AsNoTracking()
              .ToListAsync(cancellationToken);
 
@@ -33,7 +33,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
 
     public async Task<List<Customer>> GetCustomerById(Guid id, CancellationToken cancellationToken)
     {
-        List<Customer> customers = await _db.Customer
+        var customers = await _db.Customer
             .Where(x => x.ID == id)
             .AsNoTracking()
             .ToListAsync(cancellationToken);

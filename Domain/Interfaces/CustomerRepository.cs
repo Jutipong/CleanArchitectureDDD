@@ -8,7 +8,7 @@ public interface ICustomerRepository
     void UpdateCustomer(Customer customer);
     void DeleteCustomer(Guid id, CancellationToken cancellationToken);
     Task<List<Customer>> GetCustomerById(Guid id, CancellationToken cancellationToken);
-    Task<List<Customer>> Inquiry(string Name, CancellationToken cancellationToken);
+    Task<List<Customer>> Inquiry(string name, CancellationToken cancellationToken);
 }
 
 

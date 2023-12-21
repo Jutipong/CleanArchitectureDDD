@@ -1,11 +1,11 @@
 ﻿namespace Application.Customer.Queries.GetById;
 
-public record GetCustomerByIdQuery(Guid id) : IRequestResult;
+public record GetCustomerByIdQuery(Guid Id) : IRequestResult;
 
 public class Validate : AbstractValidator<GetCustomerByIdQuery>
 {
     public Validate()
     {
-        RuleFor(r => r.id).NotEmpty();
+        RuleFor(r => r.Id).NotEmpty();
     }
 }

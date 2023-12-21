@@ -9,8 +9,8 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
-var _config = config.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
-builder.Services.AddSingleton(_config);
+var appconfig = config.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
+builder.Services.AddSingleton(appconfig);
 
 var assembly = typeof(Program).Assembly;
 builder.Services.AddSwagger();
@@ -31,7 +31,7 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if(app.Environment.IsDevelopment())
 {
     app.UseSwaggerEndpoints();
 }

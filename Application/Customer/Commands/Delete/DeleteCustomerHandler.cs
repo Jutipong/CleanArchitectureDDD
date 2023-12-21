@@ -12,7 +12,7 @@ public record DeleteCustomerHandler : IRequestHandlerResult<DeleteCustomerComman
 
     public Task<Result> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
     {
-        _customerRepository.DeleteCustomer(request.id, cancellationToken);
+        _customerRepository.DeleteCustomer(request.Id, cancellationToken);
 
         return Task.FromResult(Result.Success());
     }

@@ -18,7 +18,7 @@ public class ValidationBehavior<TRequest, TResponse>
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        if (!_validators.Any())
+        if(!_validators.Any())
         {
             return await next();
         }
@@ -34,11 +34,8 @@ public class ValidationBehavior<TRequest, TResponse>
                 validationFailure.ErrorMessage))
             .ToList();
 
-        if (validationErrors.Any())
-        {
-            throw new Exceptions.ValidationException(validationErrors);
-        }
-
-        return await next();
+        return validationErrors.Count != 0
+        ? throw new Exceptions.ValidationException(validationErrors)
+        : await next();
     }
 }
