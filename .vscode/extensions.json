@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "adrianwilczynski.namespace",
+        "streetsidesoftware.code-spell-checker",
+        "roonie007.hide-files",
+        "ms-dotnettools.vscodeintellicode-csharp",
+        "patcx.vscode-nuget-gallery",
+        "aliasadidev.nugetpackagemanagergui",
+        "vscode-icons-team.vscode-icons"
+    ]
+}
