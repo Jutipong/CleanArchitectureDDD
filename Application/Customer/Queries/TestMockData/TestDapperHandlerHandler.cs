@@ -1,8 +1,8 @@
 namespace Application.Customer.Queries.Inquiry;
 
-public record TestMockDataHandlerQuery(string Name) : IRequestResult;
+public record TestDapperHandlerQuery(string Name) : IRequestResult;
 
-internal class TestMockDataHandler : IRequestHandlerResult<TestMockDataHandlerQuery>
+internal class TestMockDataHandler : IRequestHandlerResult<TestDapperHandlerQuery>
 {
     private readonly ICustomerRepository _customerRepository;
 
@@ -11,7 +11,7 @@ internal class TestMockDataHandler : IRequestHandlerResult<TestMockDataHandlerQu
         _customerRepository = customerRepository;
     }
 
-    public async Task<Result> Handle(TestMockDataHandlerQuery request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(TestDapperHandlerQuery request, CancellationToken cancellationToken)
     {
         // user ef
         var customers = new List<Entities.Customer>();
@@ -26,9 +26,9 @@ internal class TestMockDataHandler : IRequestHandlerResult<TestMockDataHandlerQu
         customers.AddRange(customerDapper1.Result);
         customers.AddRange(customerDapper2.Result);
 
-        return customers.Count != 0
-            ? Result.Success(customers)
-            : Result.Failure(Error.DataNotFound);
+        return customers.Count == 0
+            ? Result.Failure(Error.DataNotFound)
+            : Result.Success(customers);
 
     }
 }

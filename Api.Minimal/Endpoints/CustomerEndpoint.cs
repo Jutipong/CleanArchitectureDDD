@@ -55,7 +55,7 @@ public class CustomerEndpoint : CarterModule
 
         app.MapGet("/Demo_EfCore_Dapper", async (ISender sender, CancellationToken cancellationToken) =>
         {
-            var result = await sender.Send(new TestMockDataHandlerQuery(""), cancellationToken);
+            var result = await sender.Send(new TestDapperHandlerQuery(""), cancellationToken);
             return result;
         });
     }
