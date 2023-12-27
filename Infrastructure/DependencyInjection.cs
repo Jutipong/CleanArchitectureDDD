@@ -1,11 +1,10 @@
 using Domain.Abstractions;
-using Domain.Interfaces;
 using Infrastructure.Databases;
 using Infrastructure.Databases.SqlServer;
-using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Infrastructure;
 
@@ -15,6 +14,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         AddPersistence(services, configuration);
+        AddRepositories(services);
 
         return services;
     }
@@ -30,26 +30,25 @@ public static class DependencyInjection
             option => option.UseCompatibilityLevel(120)));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+    }
 
-        // Register repositories
-        //var assembly = Assembly.GetExecutingAssembly();
-        //var serviceTypes = assembly
-        //    .GetTypes()
-        //    .Where(type => type.Name.EndsWith("Repository"))
-        //    .ToList();
+    private static void AddRepositories(IServiceCollection services)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
 
-        //foreach(var serviceType in serviceTypes)
-        //{
-        //    var interfaceType = serviceType
-        //        .GetInterfaces()
-        //        .FirstOrDefault(type => type.Name.EndsWith(serviceType.Name));
+        var serviceTypes = assembly.GetTypes()
+                                   .Where(type => type.Name.EndsWith("Repository"))
+                                   .ToList();
 
-        //    if(interfaceType != null)
-        //    {
-        //        services.AddScoped(interfaceType, serviceType);
-        //    }
-        //}
+        foreach(var serviceType in serviceTypes)
+        {
+            var interfaceType = serviceType.GetInterfaces()
+                                           .FirstOrDefault(type => type.Name.EndsWith(serviceType.Name));
 
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
+            if(interfaceType != null)
+            {
+                services.AddScoped(interfaceType, serviceType);
+            }
+        }
     }
 }
