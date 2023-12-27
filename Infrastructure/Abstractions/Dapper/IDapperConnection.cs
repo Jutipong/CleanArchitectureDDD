@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Infrastructure.Databases.Dapper;
+namespace Infrastructure.Abstractions.Dapper;
 public interface IDapperConnection
 {
     IDbConnection CreateConnection();

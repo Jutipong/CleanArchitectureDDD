@@ -1,7 +1,7 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace Infrastructure.Databases.Dapper;
+namespace Infrastructure.Abstractions.Dapper;
 
 internal sealed class DapperConnection : IDapperConnection
 {

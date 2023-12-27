@@ -1,7 +1,7 @@
 using Dapper;
 using Domain.Entities;
 using Domain.Interfaces;
-using Infrastructure.Databases.Dapper;
+using Infrastructure.Abstractions.Dapper;
 using Infrastructure.Databases.SqlServer;
 using Microsoft.EntityFrameworkCore;
 

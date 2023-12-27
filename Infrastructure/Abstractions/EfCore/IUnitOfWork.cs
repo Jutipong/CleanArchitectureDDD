@@ -1,7 +1,7 @@
 using Domain.Abstractions;
 using Infrastructure.Databases.SqlServer;
 
-namespace Infrastructure.Databases;
+namespace Infrastructure.Abstractions.EfCore;
 
 public class UnitOfWork : IUnitOfWork
 {

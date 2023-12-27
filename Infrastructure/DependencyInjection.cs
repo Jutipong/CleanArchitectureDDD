@@ -1,6 +1,6 @@
 using Domain.Abstractions;
-using Infrastructure.Databases;
-using Infrastructure.Databases.Dapper;
+using Infrastructure.Abstractions.Dapper;
+using Infrastructure.Abstractions.EfCore;
 using Infrastructure.Databases.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
