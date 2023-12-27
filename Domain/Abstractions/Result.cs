@@ -1,4 +1,4 @@
-﻿namespace Domain.Abstractions;
+namespace Domain.Abstractions;
 
 public class Result
 {
@@ -82,4 +82,6 @@ public record Error(string Code, string Message)
     public static readonly Error NullValue = new("Error.NullValue", "The specified result value is null.");
 
     public static readonly Error ConditionNotMet = new("Error.ConditionNotMet", "The specified condition was not met.");
+
+    public static readonly Error DataNotFound = new("Error.DataNotFound", "Data not found.");
 }
