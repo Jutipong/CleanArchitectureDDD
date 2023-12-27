@@ -1,5 +1,6 @@
 using Domain.Abstractions;
 using Infrastructure.Databases;
+using Infrastructure.Databases.Dapper;
 using Infrastructure.Databases.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,26 +14,32 @@ public static class DependencyInjection
 
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        AddPersistence(services, configuration);
+        var sqlConnection =
+            configuration.GetConnectionString("SqlServer") ??
+            throw new ArgumentNullException(nameof(configuration));
+
+        AddPersistenceEfCore(services, sqlConnection);
+        AddPersistenceDapper(services, sqlConnection);
         AddRepositories(services);
 
         return services;
     }
 
-    private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
+    private static void AddPersistenceEfCore(IServiceCollection services, string sqlConnection)
     {
-        var sqlConnection =
-            configuration.GetConnectionString("SqlServer") ??
-            throw new ArgumentNullException(nameof(configuration));
-
         services.AddDbContext<SqlContext>(
             options => options.UseSqlServer(sqlConnection,
             option => option.UseCompatibilityLevel(120)));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
     }
 
-    // Auto AddRepositories
+    private static void AddPersistenceDapper(IServiceCollection services, string sqlConnection)
+    {
+        services.AddSingleton<IDapperConnection>(_ => new DapperConnection(sqlConnection));
+    }
+
     private static void AddRepositories(IServiceCollection services)
     {
         var assembly = Assembly.GetExecutingAssembly();

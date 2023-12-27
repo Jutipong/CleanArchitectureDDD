@@ -1,25 +1,35 @@
+using Dapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Infrastructure.Databases.Dapper;
 using Infrastructure.Databases.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository;
 
-public class CustomerRepository(SqlContext db) : RepositoryBase<Customer>(db), ICustomerRepository
+public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
 {
-    private readonly SqlContext _db = db;
+    private readonly SqlContext _dbContext;
+    private readonly IDapperConnection _dapperContext;
+
+    public CustomerRepository(SqlContext dbContext, IDapperConnection dapperContext) : base(dbContext)
+    {
+        _dbContext = dbContext;
+        _dapperContext = dapperContext;
+    }
+
 
     public async Task<Guid> CreateCustomer(Customer customer, CancellationToken cancellationToken)
     {
         customer.ID = Guid.NewGuid();
-        await _db.Customer.AddAsync(customer, cancellationToken);
+        await _dbContext.Customer.AddAsync(customer, cancellationToken);
 
         return customer.ID;
     }
 
     public async Task<List<Customer>> Inquiry(string name, CancellationToken cancellationToken)
     {
-        var customers = await _db.Customer
+        var customers = await _dbContext.Customer
              .Where(customer => string.IsNullOrWhiteSpace(name) || name.Contains(customer.Name!))
              .AsNoTracking()
              .ToListAsync(cancellationToken);
@@ -29,31 +39,31 @@ public class CustomerRepository(SqlContext db) : RepositoryBase<Customer>(db), I
 
     public async Task<Customer?> GetCustomerById(Guid id, CancellationToken cancellationToken)
     {
-        var customers = await _db.Customer
+        var customers = await _dbContext.Customer
             .FirstOrDefaultAsync(x => x.ID == id, cancellationToken);
 
         return customers;
     }
 
-    //public async Task<bool> UpdateCustomer(Customer customer, CancellationToken cancellationToken)
-    //{
-    //    var customerDb = await _db.Customer.FirstOrDefaultAsync(x => x.ID == customer.ID, cancellationToken);
-    //    if(customerDb != null)
-    //    {
-    //        customerDb.Code = customer.Code;
-    //        customerDb.Name = customer.Name;
-    //        customerDb.Email = customer.Email;
-    //        customerDb.Age = customer.Age;
+    public async Task<bool> UpdateCustomer(Customer customer, CancellationToken cancellationToken)
+    {
+        var customerDb = await _dbContext.Customer.FirstOrDefaultAsync(x => x.ID == customer.ID, cancellationToken);
+        if(customerDb != null)
+        {
+            customerDb.Code = customer.Code;
+            customerDb.Name = customer.Name;
+            customerDb.Email = customer.Email;
+            customerDb.Age = customer.Age;
 
-    //        return true;
-    //    }
+            return true;
+        }
 
-    //    return false;
-    //}
+        return false;
+    }
 
     public void DeleteCustomer(Guid id, CancellationToken cancellationToken)
     {
-        _db.RemoveRange(_db.Customer.Where(customer => customer.ID == id));
+        _dbContext.RemoveRange(_dbContext.Customer.Where(customer => customer.ID == id));
     }
 
 
@@ -61,7 +71,7 @@ public class CustomerRepository(SqlContext db) : RepositoryBase<Customer>(db), I
     public async Task<List<Customer>> MackCustomerDataEf(CancellationToken cancellationToken)
     {
         // generate thread sleep 10sec
-        var customer = await _db.Database.SqlQuery<Customer>($"Select * From Customer")
+        var customer = await _dbContext.Database.SqlQuery<Customer>($"Select * From Customer")
                                          .ToListAsync(cancellationToken);
 
         return customer;
@@ -70,24 +80,28 @@ public class CustomerRepository(SqlContext db) : RepositoryBase<Customer>(db), I
     // dapper
     public async Task<List<Customer>> MackCustomerDataDapper1(CancellationToken cancellationToken)
     {
-        // generate thread sleep 10sec
-        var customer = await _db.Database.SqlQuery<Customer>($"Select * From Customer")
-                                         .ToListAsync(cancellationToken);
+        using var connection = _dapperContext.CreateConnection();
 
-        Thread.Sleep(10000);
+        const string SQL = """ SELECT * FROM Customer """;
 
-        return customer;
+        var query = await connection.QueryAsync<Customer>(SQL);
+
+        var customers = query.ToList();
+
+        return customers;
     }
 
     // dapper
     public async Task<List<Customer>> MackCustomerDataDapper2(CancellationToken cancellationToken)
     {
-        // generate thread sleep 30sec
-        var customer = await _db.Database.SqlQuery<Customer>($"Select * From Customer")
-                                         .ToListAsync(cancellationToken);
+        using var connection = _dapperContext.CreateConnection();
 
-        Thread.Sleep(10000);
+        const string SQL = """ SELECT * FROM Customer """;
 
-        return customer;
+        var query = await connection.QueryAsync<Customer>(SQL);
+
+        var customers = query.ToList();
+
+        return customers;
     }
 }
