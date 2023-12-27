@@ -14,7 +14,7 @@ internal sealed class GetCustomerHandler : IRequestHandlerResult<GetCustomerById
         var customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
 
         return customer?.Count == 0
-            ? Result.Failure(Error.NullValue)
+            ? Result.Failure(Error.DataNotFound)
             : Result.Success(customer);
     }
 }
