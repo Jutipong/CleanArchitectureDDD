@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
+    // Auto AddRepositories
     private static void AddRepositories(IServiceCollection services)
     {
         var assembly = Assembly.GetExecutingAssembly();
