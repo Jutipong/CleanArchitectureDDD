@@ -11,9 +11,8 @@ internal sealed class CreateCustomerHandler : IRequestHandlerResult<CreateCustom
 
     public async Task<Result> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var customerId = await _customerRepository.CreateCustomer(
-            request.Adapt<Entities.Customer>(),
-            cancellationToken);
+        var customerId = await _customerRepository.CreateCustomer(request.Adapt<Entities.Customer>(),
+                                                                  cancellationToken);
 
         return Result.Success(customerId);
     }
