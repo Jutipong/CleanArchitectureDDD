@@ -55,4 +55,39 @@ public class CustomerRepository(SqlContext db) : RepositoryBase<Customer>(db), I
     {
         _db.RemoveRange(_db.Customer.Where(customer => customer.ID == id));
     }
+
+
+    //ef
+    public async Task<List<Customer>> MackCustomerDataEf(CancellationToken cancellationToken)
+    {
+        // generate thread sleep 10sec
+        var customer = await _db.Database.SqlQuery<Customer>($"Select * From Customer")
+                                         .ToListAsync(cancellationToken);
+
+        return customer;
+    }
+
+    // dapper
+    public async Task<List<Customer>> MackCustomerDataDapper1(CancellationToken cancellationToken)
+    {
+        // generate thread sleep 10sec
+        var customer = await _db.Database.SqlQuery<Customer>($"Select * From Customer")
+                                         .ToListAsync(cancellationToken);
+
+        Thread.Sleep(10000);
+
+        return customer;
+    }
+
+    // dapper
+    public async Task<List<Customer>> MackCustomerDataDapper2(CancellationToken cancellationToken)
+    {
+        // generate thread sleep 30sec
+        var customer = await _db.Database.SqlQuery<Customer>($"Select * From Customer")
+                                         .ToListAsync(cancellationToken);
+
+        Thread.Sleep(10000);
+
+        return customer;
+    }
 }
