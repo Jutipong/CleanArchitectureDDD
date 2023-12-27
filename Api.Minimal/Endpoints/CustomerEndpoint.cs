@@ -52,5 +52,11 @@ public class CustomerEndpoint : CarterModule
             var result = await sender.Send(req, cancellationToken);
             return result;
         });
+
+        app.MapGet("/Test", async (ISender sender, CancellationToken cancellationToken) =>
+        {
+            var result = await sender.Send(new TestMockDataHandlerQuery(""), cancellationToken);
+            return result;
+        });
     }
 }
