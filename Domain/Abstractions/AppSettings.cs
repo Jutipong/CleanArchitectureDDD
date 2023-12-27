@@ -1,4 +1,4 @@
-﻿namespace Domain.Abstractions;
+namespace Domain.Abstractions;
 
 public record AppSettings(
     string SystemId,
