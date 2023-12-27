@@ -1,21 +1,17 @@
-﻿using Domain.Entities;
+using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Databases.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository;
 
-public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
+public class CustomerRepository(SqlContext db) : RepositoryBase<Customer>(db), ICustomerRepository
 {
-    private readonly SqlContext _db;
-
-    public CustomerRepository(SqlContext db) : base(db)
-    {
-        _db = db;
-    }
+    private readonly SqlContext _db = db;
 
     public async Task<Guid> CreateCustomer(Customer customer, CancellationToken cancellationToken)
     {
+        customer.ID = Guid.NewGuid();
         await _db.Customer.AddAsync(customer, cancellationToken);
 
         return customer.ID;
@@ -31,24 +27,32 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         return customers;
     }
 
-    public async Task<List<Customer>> GetCustomerById(Guid id, CancellationToken cancellationToken)
+    public async Task<Customer?> GetCustomerById(Guid id, CancellationToken cancellationToken)
     {
         var customers = await _db.Customer
-            .Where(x => x.ID == id)
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+            .FirstOrDefaultAsync(x => x.ID == id, cancellationToken);
 
         return customers;
     }
 
-    public void UpdateCustomer(Customer customer)
-    {
-        _db.Update(customer);
-    }
+    //public async Task<bool> UpdateCustomer(Customer customer, CancellationToken cancellationToken)
+    //{
+    //    var customerDb = await _db.Customer.FirstOrDefaultAsync(x => x.ID == customer.ID, cancellationToken);
+    //    if(customerDb != null)
+    //    {
+    //        customerDb.Code = customer.Code;
+    //        customerDb.Name = customer.Name;
+    //        customerDb.Email = customer.Email;
+    //        customerDb.Age = customer.Age;
+
+    //        return true;
+    //    }
+
+    //    return false;
+    //}
 
     public void DeleteCustomer(Guid id, CancellationToken cancellationToken)
     {
-        var del = _db.Customer.FirstOrDefaultAsync(customer => customer.ID == id, cancellationToken);
-        _db.Remove(del);
+        _db.RemoveRange(_db.Customer.Where(customer => customer.ID == id));
     }
 }

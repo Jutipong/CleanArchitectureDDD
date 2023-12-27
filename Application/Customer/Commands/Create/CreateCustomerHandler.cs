@@ -1,11 +1,13 @@
-﻿namespace Application.Customer.Commands.Create;
+namespace Application.Customer.Commands.Create;
 
 internal sealed class CreateCustomerHandler : IRequestHandlerResult<CreateCustomerCommand>
 {
+    private readonly IUnitOfWork _unitOfWork;
     private readonly ICustomerRepository _customerRepository;
 
-    public CreateCustomerHandler(ICustomerRepository customerRepository)
+    public CreateCustomerHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
     {
+        _unitOfWork = unitOfWork;
         _customerRepository = customerRepository;
     }
 
@@ -13,6 +15,8 @@ internal sealed class CreateCustomerHandler : IRequestHandlerResult<CreateCustom
     {
         var customerId = await _customerRepository.CreateCustomer(request.Adapt<Entities.Customer>(),
                                                                   cancellationToken);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(customerId);
     }

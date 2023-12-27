@@ -1,4 +1,4 @@
-﻿using Application.Customer.Commands.Create;
+using Application.Customer.Commands.Create;
 using Application.Customer.Commands.Delete;
 using Application.Customer.Commands.Update;
 using Application.Customer.Queries.GetById;
@@ -15,33 +15,41 @@ public class CustomerEndpoint : CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/Create", async (ISender sender, CreateCustomerCommand req) =>
+        app.MapPost("/Create", async (ISender sender,
+                                      CreateCustomerCommand req,
+                                      CancellationToken cancellationToken) =>
         {
-            var result = await sender.Send(req);
+            var result = await sender.Send(req, cancellationToken);
             return result;
         });
 
-        app.MapPost("/Update", async (ISender sender, UpdateCustomerCommand req) =>
+        app.MapPost("/Update", async (ISender sender,
+                                      UpdateCustomerCommand req,
+                                      CancellationToken cancellationToken) =>
         {
-            var result = await sender.Send(req);
+            var result = await sender.Send(req, cancellationToken);
             return result;
         });
 
-        app.MapPost("/Delete", async (ISender sender, DeleteCustomerCommand req) =>
+        app.MapPost("/Delete", async (ISender sender,
+                                      DeleteCustomerCommand req,
+                                      CancellationToken cancellationToken) =>
         {
-            var result = await sender.Send(req);
+            var result = await sender.Send(req, cancellationToken);
             return result;
         });
 
-        app.MapGet("/GetById/{id}", async (ISender sender, Guid id) =>
+        app.MapGet("/GetById/{id}", async (ISender sender, Guid id, CancellationToken cancellationToken) =>
         {
-            var result = await sender.Send(new GetCustomerByIdQuery(id));
+            var result = await sender.Send(new GetCustomerByIdQuery(id), cancellationToken);
             return result;
         });
 
-        app.MapPost("/Inquiry", async (ISender sender, InquiryCustomerQuery req) =>
+        app.MapPost("/Inquiry", async (ISender sender,
+                                       InquiryCustomerQuery req,
+                                       CancellationToken cancellationToken) =>
         {
-            var result = await sender.Send(req);
+            var result = await sender.Send(req, cancellationToken);
             return result;
         });
     }

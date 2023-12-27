@@ -2,10 +2,10 @@
 
 public class CreateCustomerCommand : IRequestResult
 {
-    public string Code { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public int? Age { get; set; } = null;
-    public string Email { get; set; } = string.Empty;
+    public string Code { get; init; } = string.Empty;
+    public string Name { get; init; } = string.Empty;
+    public int? Age { get; init; } = null;
+    public string Email { get; init; } = string.Empty;
 }
 
 public class Validate : AbstractValidator<CreateCustomerCommand>

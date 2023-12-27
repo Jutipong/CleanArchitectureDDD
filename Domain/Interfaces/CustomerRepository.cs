@@ -1,13 +1,13 @@
-﻿using Domain.Entities;
+using Domain.Entities;
 
 namespace Domain.Interfaces;
 
 public interface ICustomerRepository
 {
     Task<Guid> CreateCustomer(Customer customer, CancellationToken cancellationToken);
-    void UpdateCustomer(Customer customer);
+    //Task<bool> UpdateCustomer(Customer customer, CancellationToken cancellationToken);
     void DeleteCustomer(Guid id, CancellationToken cancellationToken);
-    Task<List<Customer>> GetCustomerById(Guid id, CancellationToken cancellationToken);
+    Task<Customer?> GetCustomerById(Guid id, CancellationToken cancellationToken);
     Task<List<Customer>> Inquiry(string name, CancellationToken cancellationToken);
 }
 

@@ -1,9 +1,10 @@
-﻿namespace Application.Customer.Commands.Update;
+namespace Application.Customer.Commands.Update;
 
 public class UpdateCustomerCommand : IRequestResult
 {
-    public string Code { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public int Age { get; set; } = 99;
-    public string Email { get; set; } = string.Empty;
+    public Guid Id { get; init; }
+    public string Code { get; init; } = string.Empty;
+    public string Name { get; init; } = string.Empty;
+    public short? Age { get; init; }
+    public string Email { get; init; } = string.Empty;
 }

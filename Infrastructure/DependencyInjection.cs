@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces;
+using Domain.Abstractions;
+using Domain.Interfaces;
+using Infrastructure.Databases;
 using Infrastructure.Databases.SqlServer;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,8 @@ public static class DependencyInjection
         services.AddDbContext<SqlContext>(
             options => options.UseSqlServer(sqlConnection,
             option => option.UseCompatibilityLevel(120)));
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Register repositories
         //var assembly = Assembly.GetExecutingAssembly();
