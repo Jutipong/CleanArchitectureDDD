@@ -16,6 +16,17 @@ dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_style_prefer_simplified_interpolation = true:suggestion
 dotnet_style_namespace_match_folder = true:suggestion
+dotnet_style_coalesce_expression = true:error
+dotnet_style_null_propagation = true:error
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
+dotnet_style_prefer_auto_properties = true:warning
+dotnet_style_object_initializer = true:warning
+dotnet_style_collection_initializer = true:warning
+dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:warning
+dotnet_style_explicit_tuple_names = true:error
+dotnet_style_prefer_inferred_tuple_names = true:warning
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:warning
 
 [*.csproj]
 indent_style = space
@@ -293,7 +304,7 @@ dotnet_naming_rule.constant_fields_must_be_pascal_case.style = all_upper_style
 # Static readonly fields must be PascalCase
 dotnet_naming_rule.static_readonly_fields_must_be_pascal_case.severity = warning
 dotnet_naming_rule.static_readonly_fields_must_be_pascal_case.symbols = static_readonly_fields
-dotnet_naming_rule.static_readonly_fields_must_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.static_readonly_fields_must_be_pascal_case.style = suffix_with_async_style
 
 # Private readonly fields must be camelCase and start with underscore
 dotnet_naming_rule.private_readonly_fields_must_be_camel_case.severity = warning
@@ -328,7 +339,7 @@ dotnet_naming_rule.parameters_must_be_camel_case.style = camel_case_style
 # Class, struct, enum and delegates must be PascalCase
 dotnet_naming_rule.non_interface_and_enum_types_must_be_pascal_case.severity = warning
 dotnet_naming_rule.non_interface_and_enum_types_must_be_pascal_case.symbols = non_interface_and_enum_types
-dotnet_naming_rule.non_interface_and_enum_types_must_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.non_interface_and_enum_types_must_be_pascal_case.style = suffix_with_async_style
 
 # Interfaces must be PascalCase and start with an 'I'
 dotnet_naming_rule.interface_types_must_be_prefixed_with_i.severity = warning
@@ -338,7 +349,7 @@ dotnet_naming_rule.interface_types_must_be_prefixed_with_i.style = prefix_interf
 # Enums must be PascalCase
 dotnet_naming_rule.enum_types_must_be_pascal_case_style.severity = warning
 dotnet_naming_rule.enum_types_must_be_pascal_case_style.symbols = enum_types
-dotnet_naming_rule.enum_types_must_be_pascal_case_style.style = pascal_case_style
+dotnet_naming_rule.enum_types_must_be_pascal_case_style.style = suffix_with_async_style
 
 
 ################################################################################
