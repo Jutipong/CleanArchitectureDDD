@@ -1,4 +1,4 @@
-﻿namespace Application.Customer.Queries.GetById;
+namespace Application.Customer.GetById;
 
 public record GetCustomerByIdQuery(Guid Id) : IRequestResult;
 

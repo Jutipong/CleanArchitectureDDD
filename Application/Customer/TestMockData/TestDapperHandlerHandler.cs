@@ -1,4 +1,4 @@
-namespace Application.Customer.Queries.Inquiry;
+namespace Application.Customer.TestMockData;
 
 public record TestDapperHandlerQuery(string Name) : IRequestResult;
 

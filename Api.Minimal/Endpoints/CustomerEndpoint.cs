@@ -1,8 +1,9 @@
-using Application.Customer.Commands.Create;
-using Application.Customer.Commands.Delete;
-using Application.Customer.Commands.Update;
-using Application.Customer.Queries.GetById;
-using Application.Customer.Queries.Inquiry;
+using Application.Customer.Create;
+using Application.Customer.Delete;
+using Application.Customer.GetById;
+using Application.Customer.Inquiry;
+using Application.Customer.TestMockData;
+using Application.Customer.Update;
 
 namespace Api.Minimal.Endpoints;
 

@@ -1,6 +1,4 @@
-
-
-namespace Application.Customer.Commands.Delete;
+namespace Application.Customer.Delete;
 public record DeleteCustomerHandler : IRequestHandlerResult<DeleteCustomerCommand>
 {
     private readonly IUnitOfWork _unitOfWork;

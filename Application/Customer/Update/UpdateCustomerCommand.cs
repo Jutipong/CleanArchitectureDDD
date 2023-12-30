@@ -1,4 +1,4 @@
-namespace Application.Customer.Commands.Update;
+namespace Application.Customer.Update;
 
 public class UpdateCustomerCommand : IRequestResult
 {

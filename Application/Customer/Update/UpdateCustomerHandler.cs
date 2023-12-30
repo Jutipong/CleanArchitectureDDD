@@ -1,5 +1,4 @@
-
-namespace Application.Customer.Commands.Update;
+namespace Application.Customer.Update;
 
 internal sealed class UpdateCustomerHandler : IRequestHandlerResult<UpdateCustomerCommand>
 {

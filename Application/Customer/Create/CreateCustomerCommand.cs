@@ -1,4 +1,4 @@
-﻿namespace Application.Customer.Commands.Create;
+namespace Application.Customer.Create;
 
 public class CreateCustomerCommand : IRequestResult
 {
