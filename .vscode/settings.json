@@ -74,5 +74,5 @@
     "csharp.format.enable": true,
     "diffEditor.hideUnchangedRegions.enabled": true,
     "razor.devmode": true,
-    "workbench.colorTheme": "Simple Dark"
+    "workbench.colorTheme": "Dracula"
 }
