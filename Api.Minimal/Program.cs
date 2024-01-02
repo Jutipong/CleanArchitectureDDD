@@ -1,7 +1,6 @@
 using Api.Minimal.Extensions;
 using Api.Minimal.Middleware;
 using Application;
-using Carter;
 using Domain.Abstractions;
 using Infrastructure;
 using Serilog;
@@ -9,8 +8,8 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
-var appconfig = config.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
-builder.Services.AddSingleton(appconfig);
+var appConfig = config.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
+builder.Services.AddSingleton(appConfig);
 
 var assembly = typeof(Program).Assembly;
 builder.Services.AddSwagger();

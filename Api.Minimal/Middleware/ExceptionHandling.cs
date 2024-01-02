@@ -1,4 +1,4 @@
-﻿using Application.Abstractions.Exceptions;
+using Application.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Minimal.Middleware;
@@ -20,7 +20,7 @@ public class ExceptionHandling
         {
             await _next(context);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             _logger.LogError(ex, "Exception occurred: {Message}", ex.Message);
 
@@ -35,7 +35,7 @@ public class ExceptionHandling
                 Instance = context.Request.Path
             };
 
-            if (exceptionDetails.Errors is not null)
+            if(exceptionDetails.Errors is not null)
             {
                 problemDetails.Extensions["errors"] = exceptionDetails.Errors;
             }

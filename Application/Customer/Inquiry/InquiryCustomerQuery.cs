@@ -1,2 +1,2 @@
-﻿namespace Application.Customer.Queries.Inquiry;
+namespace Application.Customer.Inquiry;
 public record InquiryCustomerQuery(string Name) : IRequestResult;

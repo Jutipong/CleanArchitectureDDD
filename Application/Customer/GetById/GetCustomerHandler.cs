@@ -1,4 +1,4 @@
-﻿namespace Application.Customer.Queries.GetById;
+namespace Application.Customer.GetById;
 
 internal sealed class GetCustomerHandler : IRequestHandlerResult<GetCustomerByIdQuery>
 {
@@ -13,8 +13,8 @@ internal sealed class GetCustomerHandler : IRequestHandlerResult<GetCustomerById
     {
         var customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
 
-        return customer?.Count == 0
-            ? Result.Failure(Error.NullValue)
+        return customer is null
+            ? Result.Failure(Error.DataNotFound)
             : Result.Success(customer);
     }
 }

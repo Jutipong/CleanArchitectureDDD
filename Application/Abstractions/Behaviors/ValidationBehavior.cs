@@ -27,7 +27,7 @@ public class ValidationBehavior<TRequest, TResponse>
 
         var validationErrors = _validators
             .Select(validator => validator.Validate(context))
-            .Where(validationResult => validationResult.Errors.Any())
+            .Where(validationResult => validationResult.Errors.Count != 0)
             .SelectMany(validationResult => validationResult.Errors)
             .Select(validationFailure => new ValidationError(
                 validationFailure.PropertyName,
