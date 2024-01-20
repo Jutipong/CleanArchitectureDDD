@@ -74,5 +74,9 @@
     "csharp.format.enable": true,
     "diffEditor.hideUnchangedRegions.enabled": true,
     "razor.devmode": true,
-    "workbench.colorTheme": "Dracula"
+    "workbench.colorTheme": "Simple Dark",
+    "editor.fontFamily": "'Jetbrains Mono Light', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'Input Mono'",
+    "dotnet.projects.enableAutomaticRestore": false
 }
