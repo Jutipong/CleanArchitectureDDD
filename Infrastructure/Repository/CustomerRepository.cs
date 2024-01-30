@@ -12,12 +12,12 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     private readonly SqlContext _dbContext;
     private readonly IDapperConnection _dapperContext;
 
-    public CustomerRepository(SqlContext dbContext, IDapperConnection dapperContext) : base(dbContext)
+    public CustomerRepository(SqlContext dbContext, IDapperConnection dapperContext)
+        : base(dbContext)
     {
         _dbContext = dbContext;
         _dapperContext = dapperContext;
     }
-
 
     public async Task<Guid> CreateCustomer(Customer customer, CancellationToken cancellationToken)
     {
@@ -29,18 +29,17 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
 
     public async Task<List<Customer>> Inquiry(string name, CancellationToken cancellationToken)
     {
-        var customers = await _dbContext.Customer
-             .Where(customer => string.IsNullOrWhiteSpace(name) || name.Contains(customer.Name!))
-             .AsNoTracking()
-             .ToListAsync(cancellationToken);
+        var customers = await _dbContext
+            .Customer.Where(customer => string.IsNullOrWhiteSpace(name) || name.Contains(customer.Name!))
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
 
         return customers;
     }
 
     public async Task<Customer?> GetCustomerById(Guid id, CancellationToken cancellationToken)
     {
-        var customers = await _dbContext.Customer
-            .FirstOrDefaultAsync(x => x.ID == id, cancellationToken);
+        var customers = await _dbContext.Customer.FirstOrDefaultAsync(x => x.ID == id, cancellationToken);
 
         return customers;
     }
@@ -48,7 +47,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     public async Task<bool> UpdateCustomer(Customer customer, CancellationToken cancellationToken)
     {
         var customerDb = await _dbContext.Customer.FirstOrDefaultAsync(x => x.ID == customer.ID, cancellationToken);
-        if(customerDb != null)
+        if (customerDb != null)
         {
             customerDb.Code = customer.Code;
             customerDb.Name = customer.Name;
@@ -66,13 +65,13 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         _dbContext.RemoveRange(_dbContext.Customer.Where(customer => customer.ID == id));
     }
 
-
     //ef
     public async Task<List<Customer>> MackCustomerDataEf(CancellationToken cancellationToken)
     {
         // generate thread sleep 10sec
-        var customer = await _dbContext.Database.SqlQuery<Customer>($"Select * From Customer")
-                                         .ToListAsync(cancellationToken);
+        var customer = await _dbContext
+            .Database.SqlQuery<Customer>($"Select * From Customer")
+            .ToListAsync(cancellationToken);
 
         return customer;
     }
@@ -103,5 +102,17 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         var customers = query.ToList();
 
         return customers;
+    }
+
+    //test
+    public async Task<(List<Customer>, int)> ToDataTable(
+        string sorting,
+        string ordering,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken
+    )
+    {
+        return await _dbContext.Customer.OrderBy(sorting, ordering).ToPage(page, pageSize, cancellationToken);
     }
 }
