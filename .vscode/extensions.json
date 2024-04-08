@@ -2,13 +2,17 @@
     "recommendations": [
         "editorconfig.editorconfig",
         "ms-dotnettools.csharp",
-        "ms-dotnettools.csdevkit",
         "adrianwilczynski.namespace",
         "streetsidesoftware.code-spell-checker",
         "roonie007.hide-files",
         "ms-dotnettools.vscodeintellicode-csharp",
-        "patcx.vscode-nuget-gallery",
-        "aliasadidev.nugetpackagemanagergui",
-        "vscode-icons-team.vscode-icons"
+        "vscode-icons-team.vscode-icons",
+        "fullstackspider.visual-nuget",
+        "travis.simple-dark",
+        "zignd.html-css-class-completion",
+        "akamud.vscode-javascript-snippet-pack",
+        "george-alisson.html-preview-vscode",
+        "csharpier.csharpier-vscode",
+        "formulahendry.dotnet"
     ]
 }
