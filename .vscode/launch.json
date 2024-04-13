@@ -1,11 +1,11 @@
 {
-    "configurations": [
-        {
-            "name": "Api.Minimal",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}/Api.Minimal/Api.Minimal.csproj",
-            "launchConfigurationId": "TargetFramework=;vscode",
-        },
-    ]
+  "configurations": [
+    {
+      "name": "Api.Minimal",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}\\Api.Minimal\\Api.Minimal.csproj",
+      "launchConfigurationId": "TargetFramework=;vscode",
+    },
+  ]
 }

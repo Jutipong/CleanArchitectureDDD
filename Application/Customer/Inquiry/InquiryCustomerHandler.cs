@@ -1,6 +1,6 @@
 namespace Application.Customer.Inquiry;
 
-internal class InquiryCustomerHandler : IRequestHandlerResult<InquiryCustomerQuery>
+public class InquiryCustomerHandler : IRequestHandler<InquiryCustomerQuery, List<Entities.Customer>>
 {
     private readonly ICustomerRepository _customerRepository;
 
@@ -9,10 +9,10 @@ internal class InquiryCustomerHandler : IRequestHandlerResult<InquiryCustomerQue
         _customerRepository = customerRepository;
     }
 
-    public async Task<Result> Handle(InquiryCustomerQuery request, CancellationToken cancellationToken)
+    public async Task<List<Domain.Entities.Customer>> Handle(InquiryCustomerQuery request, CancellationToken cancellationToken)
     {
         var customer = await _customerRepository.Inquiry(request.Name, cancellationToken);
 
-        return customer.Count != 0 ? Result.Failure(Error.NullValue) : Result.Success(customer);
+        return customer;
     }
 }

@@ -26,9 +26,9 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 
             return result;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
-            _logger.LogError(exception, "request {RequestName} with error", requestName);
+            // _logger.LogError(exception, "request {RequestName} with error", requestName);
 
             throw;
         }
