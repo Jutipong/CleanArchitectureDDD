@@ -1,18 +1,12 @@
+using Application.Abstractions.Messaging;
+
 namespace Application.Customer.Inquiry;
 
-public class InquiryCustomerHandler : IRequestHandler<InquiryCustomerQuery, List<Entities.Customer>>
+public class InquiryCustomerHandler(ICustomerRepository customerRepository) : IQueryHandler<InquiryCustomerQuery, List<Entities.Customer>>
 {
-    private readonly ICustomerRepository _customerRepository;
-
-    public InquiryCustomerHandler(ICustomerRepository customerRepository)
+    public async Task<Result<List<Entities.Customer>>> Handle(InquiryCustomerQuery request, CancellationToken cancellationToken)
     {
-        _customerRepository = customerRepository;
-    }
-
-    public async Task<List<Domain.Entities.Customer>> Handle(InquiryCustomerQuery request, CancellationToken cancellationToken)
-    {
-        var customer = await _customerRepository.Inquiry(request.Name, cancellationToken);
-
-        return customer;
+        var customer = await customerRepository.Inquiry(request.Name, cancellationToken);
+        return Result.Success(customer);
     }
 }

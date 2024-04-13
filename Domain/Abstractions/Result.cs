@@ -1,17 +1,120 @@
+// using System.Text.Json.Serialization;
+
+// namespace Domain.Abstractions;
+
+// public class Result
+// {
+//     protected internal Result(bool isSuccess, Error error)
+//     {
+//         if (isSuccess && error != Error.None)
+//         {
+//             throw new InvalidOperationException();
+//         }
+
+//         if (!isSuccess && error == Error.None)
+//         {
+//             throw new InvalidOperationException();
+//         }
+
+//         IsSuccess = isSuccess;
+//         Error = error;
+//     }
+
+//     public bool IsSuccess { get; }
+
+//     public bool IsFailure()
+//     {
+//         return !IsSuccess;
+//     }
+
+//     public Error Error { get; }
+
+//     public static Result Success()
+//     {
+//         return new(true, Error.None);
+//     }
+
+//     public static Result<TValue> Success<TValue>(TValue value)
+//     {
+//         return new(value, true, Error.None);
+//     }
+
+//     public static Result Failure(Error error)
+//     {
+//         return new(false, error);
+//     }
+
+//     public static Result<TValue> Failure<TValue>(Error error)
+//     {
+//         return new(default, false, error);
+//     }
+
+//     public static Result Create(bool condition)
+//     {
+//         return condition ? Success() : Failure(Error.ConditionNotMet);
+//     }
+
+//     public static Result<TValue> Create<TValue>(TValue? value)
+//     {
+//         return value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
+//     }
+// }
+
+// public class Result<TValue> : Result
+// {
+//     private readonly TValue? _value;
+
+//     protected internal Result(TValue? value, bool isSuccess, Error error)
+//         : base(isSuccess, error)
+//     {
+//         _value = value;
+//     }
+
+//     public TValue Value => IsSuccess ? _value! : throw new InvalidOperationException("The value of a failure result can not be accessed.");
+
+//     public static implicit operator Result<TValue>(TValue? value)
+//     {
+//         return Create(value);
+//     }
+
+//     // public static SuccessResponse<TResponse> Success<TResponse>(TResponse data)
+//     // {
+//     //     return new SuccessResponse<TResponse> { Data = data };
+//     // }
+// }
+
+// // public class JsonResponseBase
+// // {
+// //     [JsonPropertyName("code")]
+// //     public string? Code { get; set; } = null;
+
+// //     [JsonPropertyName("message")]
+// //     public string? Message { get; set; } = null;
+// // }
+
+// // public class JsonResponse : JsonResponseBase
+// // {
+// //     [JsonPropertyName("data")]
+// //     public object? Data { get; set; } = default;
+// // }
+
+// // public class JsonResponse<TResponse> : JsonResponseBase
+// // {
+// //     [JsonPropertyName("data")]
+// //     public TResponse? Data { get; set; } = default;
+// // }
+
+using System.Diagnostics.CodeAnalysis;
+
 namespace Domain.Abstractions;
 
 public class Result
 {
-    protected internal Result(bool isSuccess, Error error)
+    public Result(bool isSuccess, Error error)
     {
-        if (isSuccess && error != Error.None)
+        if ((isSuccess && error != Error.None) || (!isSuccess && error == Error.None))
         {
-            throw new InvalidOperationException();
-        }
-
-        if (!isSuccess && error == Error.None)
-        {
-            throw new InvalidOperationException();
+            throw new ArgumentException("Invalid error", nameof(error));
         }
 
         IsSuccess = isSuccess;
@@ -43,32 +146,28 @@ public class Result
     {
         return new(default, false, error);
     }
-
-    public static Result Create(bool condition)
-    {
-        return condition ? Success() : Failure(Error.ConditionNotMet);
-    }
-
-    public static Result<TValue> Create<TValue>(TValue? value)
-    {
-        return value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
-    }
 }
 
 public class Result<TValue> : Result
 {
     private readonly TValue? _value;
 
-    protected internal Result(TValue? value, bool isSuccess, Error error)
+    public Result(TValue? value, bool isSuccess, Error error)
         : base(isSuccess, error)
     {
         _value = value;
     }
 
-    public TValue Value => IsSuccess ? _value! : throw new InvalidOperationException("The value of a failure result can not be accessed.");
+    [NotNull]
+    public TValue Value => IsSuccess ? _value! : throw new InvalidOperationException("The value of a failure result can't be accessed.");
 
     public static implicit operator Result<TValue>(TValue? value)
     {
-        return Create(value);
+        return value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
+    }
+
+    public static Result<TValue> ValidationFailure(Error error)
+    {
+        return new(default, false, error);
     }
 }

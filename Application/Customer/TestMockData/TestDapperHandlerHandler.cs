@@ -1,31 +1,34 @@
 namespace Application.Customer.TestMockData;
 
-public record TestDapperHandlerQuery(string Name) : IRequestResult;
+public record TestDapperHandlerQuery(string Name) : IRequest<Result<List<Entities.Customer>>>;
 
-internal class TestMockDataHandler : IRequestHandlerResult<TestDapperHandlerQuery>
+public class Validate : AbstractValidator<TestDapperHandlerQuery>
 {
-    private readonly ICustomerRepository _customerRepository;
-
-    public TestMockDataHandler(ICustomerRepository customerRepository)
+    public Validate()
     {
-        _customerRepository = customerRepository;
+        RuleFor(r => r.Name).NotEmpty();
     }
+}
 
-    public async Task<Result> Handle(TestDapperHandlerQuery request, CancellationToken cancellationToken)
+internal class TestMockDataHandler(ICustomerRepository customerRepository)
+    : IRequestHandler<TestDapperHandlerQuery, Result<List<Entities.Customer>>>
+{
+    public async Task<Result<List<Entities.Customer>>> Handle(TestDapperHandlerQuery request, CancellationToken cancellationToken)
     {
         // user ef
         var customers = new List<Entities.Customer>();
 
-        customers.AddRange(await _customerRepository.MackCustomerDataEf(cancellationToken));
+        customers.AddRange(await customerRepository.MackCustomerDataEf(cancellationToken));
 
         // user dapper
-        var customerDapper1 = _customerRepository.MackCustomerDataDapper1(cancellationToken);
-        var customerDapper2 = _customerRepository.MackCustomerDataDapper2(cancellationToken);
+        var customerDapper1 = customerRepository.MackCustomerDataDapper1(cancellationToken);
+        var customerDapper2 = customerRepository.MackCustomerDataDapper2(cancellationToken);
         await Task.WhenAll(customerDapper1, customerDapper2);
 
         customers.AddRange(customerDapper1.Result);
         customers.AddRange(customerDapper2.Result);
 
-        return customers.Count == 0 ? Result.Failure(Error.DataNotFound) : Result.Success(customers);
+        var result = Result.Success(customers);
+        return result;
     }
 }
