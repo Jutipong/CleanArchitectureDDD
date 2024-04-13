@@ -11,7 +11,6 @@ var config = builder.Configuration;
 var appConfig = config.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
 builder.Services.AddSingleton(appConfig);
 
-var assembly = typeof(Program).Assembly;
 builder.Services.AddSwagger();
 builder.Services.AddCors();
 builder.Services.AddCarter();

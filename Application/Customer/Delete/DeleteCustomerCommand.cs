@@ -1,3 +1,3 @@
 namespace Application.Customer.Delete;
 
-public record DeleteCustomerCommand(Guid Id) : IRequestResult;
+public record DeleteCustomerCommand(Guid Id) : IQuery;

@@ -1,4 +1,3 @@
-# Suppress: EC112 EC114
 root = true
 
 [*]
