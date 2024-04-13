@@ -8,9 +8,7 @@ namespace Infrastructure.Databases.SqlServer;
 public partial class SqlContext : DbContext
 {
     public SqlContext(DbContextOptions<SqlContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public virtual DbSet<Article> Article { get; set; }
 

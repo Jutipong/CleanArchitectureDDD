@@ -15,7 +15,7 @@ internal sealed class UpdateCustomerHandler : IRequestHandlerResult<UpdateCustom
     {
         var customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
 
-        if(customer is null)
+        if (customer is null)
         {
             return Result.Failure(Error.DataNotFound);
         }

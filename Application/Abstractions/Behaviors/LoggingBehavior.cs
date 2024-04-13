@@ -2,7 +2,8 @@
 
 namespace Application.Abstractions.Behaviors;
 
-public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : ICommandBaseCustom
+public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : ICommandBaseCustom
 {
     private readonly ILogger<TRequest> _logger;
 
@@ -13,21 +14,21 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        var name = request.GetType().Name;
+        var requestName = typeof(TRequest).Name;
 
         try
         {
-            _logger.LogInformation("Executing command {Command}", name);
+            _logger.LogInformation("Processing request {RequestName}", requestName);
 
             var result = await next();
 
-            _logger.LogInformation("Command {Command} processed successfully", name);
+            _logger.LogInformation("Completed request {RequestName}", requestName);
 
             return result;
         }
-        catch(Exception exception)
+        catch (Exception exception)
         {
-            _logger.LogError(exception, "Command {Command} processing failed", name);
+            _logger.LogError(exception, "request {RequestName} with error", requestName);
 
             throw;
         }

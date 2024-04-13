@@ -4,12 +4,12 @@ public class Result
 {
     protected internal Result(bool isSuccess, Error error)
     {
-        if(isSuccess && error != Error.None)
+        if (isSuccess && error != Error.None)
         {
             throw new InvalidOperationException();
         }
 
-        if(!isSuccess && error == Error.None)
+        if (!isSuccess && error == Error.None)
         {
             throw new InvalidOperationException();
         }
@@ -28,7 +28,6 @@ public class Result
     {
         return new(true, Error.None);
     }
-
 
     public static Result<TValue> Success<TValue>(TValue value)
     {
@@ -60,14 +59,13 @@ public class Result<TValue> : Result
 {
     private readonly TValue? _value;
 
-    protected internal Result(TValue? value, bool isSuccess, Error error) : base(isSuccess, error)
+    protected internal Result(TValue? value, bool isSuccess, Error error)
+        : base(isSuccess, error)
     {
         _value = value;
     }
 
-    public TValue Value => IsSuccess
-        ? _value!
-        : throw new InvalidOperationException("The value of a failure result can not be accessed.");
+    public TValue Value => IsSuccess ? _value! : throw new InvalidOperationException("The value of a failure result can not be accessed.");
 
     public static implicit operator Result<TValue>(TValue? value)
     {

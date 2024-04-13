@@ -1,5 +1,5 @@
-using Microsoft.Data.SqlClient;
 using System.Data;
+using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Abstractions.Dapper;
 

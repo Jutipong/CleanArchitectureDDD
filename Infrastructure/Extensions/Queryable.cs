@@ -18,11 +18,7 @@ public static class QueryableExtensions
         return !value.HasValue ? query.Where(predicate) : query;
     }
 
-    public static IQueryable<T> WhereIf<T>(
-        this IQueryable<T> query,
-        decimal? value,
-        Expression<Func<T, bool>> predicate
-    )
+    public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, decimal? value, Expression<Func<T, bool>> predicate)
     {
         return !value.HasValue ? query.Where(predicate) : query;
     }
@@ -67,11 +63,7 @@ public static class QueryableExtensions
     public const string ASC = "OrderBy";
     public const string DESC = "OrderByDescending";
 
-    public static IOrderedQueryable<TSource> OrderBy<TSource>(
-        this IQueryable<TSource> source,
-        string fieldName,
-        string ordering
-    )
+    public static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> source, string fieldName, string ordering)
     {
         var type = typeof(TSource);
         var property =

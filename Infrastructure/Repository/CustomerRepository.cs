@@ -69,9 +69,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     public async Task<List<Customer>> MackCustomerDataEf(CancellationToken cancellationToken)
     {
         // generate thread sleep 10sec
-        var customer = await _dbContext
-            .Database.SqlQuery<Customer>($"Select * From Customer")
-            .ToListAsync(cancellationToken);
+        var customer = await _dbContext.Database.SqlQuery<Customer>($"Select * From Customer").ToListAsync(cancellationToken);
 
         return customer;
     }

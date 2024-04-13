@@ -3,7 +3,7 @@ root = true
 
 [*]
 charset = utf-8
-max_line_length = 120
+max_line_length = 140
 end_of_line = crlf
 indent_size = 4
 tab_width = 4
@@ -835,4 +835,8 @@ csharp_style_expression_bodied_local_functions = false:silent
 # Other                                       #
 ###############################################
 
-# csharp_old_engine = false
+csharp_old_engine = false
+
+[*.json]
+indent_size = 2
+tab_width = 2

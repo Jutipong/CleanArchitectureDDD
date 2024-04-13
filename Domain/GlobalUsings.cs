@@ -5,6 +5,5 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain;
-internal class GlobalUsings
-{
-}
+
+internal class GlobalUsings { }

@@ -26,9 +26,6 @@ internal class TestMockDataHandler : IRequestHandlerResult<TestDapperHandlerQuer
         customers.AddRange(customerDapper1.Result);
         customers.AddRange(customerDapper2.Result);
 
-        return customers.Count == 0
-            ? Result.Failure(Error.DataNotFound)
-            : Result.Success(customers);
-
+        return customers.Count == 0 ? Result.Failure(Error.DataNotFound) : Result.Success(customers);
     }
 }

@@ -20,7 +20,7 @@ public class ExceptionHandling
         {
             await _next(context);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.LogError(ex, "Exception occurred: {Message}", ex.Message);
 
@@ -35,7 +35,7 @@ public class ExceptionHandling
                 Instance = context.Request.Path
             };
 
-            if(exceptionDetails.Errors is not null)
+            if (exceptionDetails.Errors is not null)
             {
                 problemDetails.Extensions["errors"] = exceptionDetails.Errors;
             }
@@ -49,25 +49,24 @@ public class ExceptionHandling
     {
         return ex switch
         {
-            ValidationException validationException => new ExceptionDetails(
-                StatusCodes.Status400BadRequest,
-                "ValidationFailure",
-                "Validation error",
-                "One or more validation failures have occurred.",
-                validationException.Errors),
-            _ => new ExceptionDetails(
-                StatusCodes.Status500InternalServerError,
-                "ServerError",
-                "Server error",
-                "An unexpected error occurred.",
-                null)
+            ValidationException validationException
+                => new ExceptionDetails(
+                    StatusCodes.Status400BadRequest,
+                    "ValidationFailure",
+                    "Validation error",
+                    "One or more validation failures have occurred.",
+                    validationException.Errors
+                ),
+            _
+                => new ExceptionDetails(
+                    StatusCodes.Status500InternalServerError,
+                    "ServerError",
+                    "Server error",
+                    "An unexpected error occurred.",
+                    null
+                )
         };
     }
 
-    internal record ExceptionDetails(
-        int Status,
-        string Type,
-        string Title,
-        string Detail,
-        IEnumerable<object>? Errors);
+    internal record ExceptionDetails(int Status, string Type, string Title, string Detail, IEnumerable<object>? Errors);
 }
