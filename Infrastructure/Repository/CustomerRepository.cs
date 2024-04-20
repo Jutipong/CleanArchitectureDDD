@@ -44,7 +44,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         return customers;
     }
 
-    public async Task<bool> UpdateCustomer(Customer customer, CancellationToken cancellationToken)
+    public async Task<bool> UpdateCustomerAsync(Customer customer, CancellationToken cancellationToken)
     {
         var customerDb = await _dbContext.Customer.FirstOrDefaultAsync(x => x.ID == customer.ID, cancellationToken);
         if (customerDb != null)
@@ -103,7 +103,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     }
 
     //test
-    public async Task<(List<Customer>, int)> ToDataTable(
+    public async Task<(List<Customer>, int)> ToDataTableAsync(
         string sorting,
         string ordering,
         int page,
@@ -111,6 +111,6 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
         CancellationToken cancellationToken
     )
     {
-        return await _dbContext.Customer.OrderBy(sorting, ordering).ToPage(page, pageSize, cancellationToken);
+        return await _dbContext.Customer.OrderBy(sorting, ordering).ToPageAsync(page, pageSize, cancellationToken);
     }
 }
