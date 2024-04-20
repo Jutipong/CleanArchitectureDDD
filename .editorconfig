@@ -4,17 +4,36 @@ root = true
 [*]
 charset = utf-8
 max_line_length = 140
-end_of_line = crlf
 indent_size = 4
+tab_width = 4
 indent_style = space
 insert_final_newline = false
 trim_trailing_whitespace = true
-end_of_line = lf - there is no 'auto' with a .editorconfig
+end_of_line = crlf
+dotnet_style_coalesce_expression = true:error
+dotnet_style_null_propagation = true:error
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+dotnet_style_prefer_auto_properties = true:suggestion
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
+dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
+dotnet_style_prefer_conditional_expression_over_return = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
+dotnet_style_prefer_compound_assignment = true:suggestion
+dotnet_style_prefer_simplified_interpolation = true:suggestion
+dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
+dotnet_style_namespace_match_folder = true:error
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
 
 [*.cs]
 ###############################
 # .NET Coding Conventions     #
 ###############################
+
+csharp_style_namespace_declarations = file_scoped:warning
 
 #use lLanguage keywords instead of framework type names for type references
 dotnet_style_predefined_type_for_locals_parameters_members = true:error
@@ -81,7 +100,7 @@ csharp_style_throw_expression = true:error
 csharp_style_conditional_delegate_call = true:error
 
 #use code block preferences
-csharp_prefer_braces = true:suggestion
+csharp_prefer_braces = true:error
 
 ###############################
 # .NET formatting settings    #
@@ -122,7 +141,7 @@ csharp_space_after_dot = false
 csharp_space_after_semicolon_in_for_statement = true
 
 #use space after flow statements
-csharp_space_after_keywords_in_control_flow_statements = false
+csharp_space_after_keywords_in_control_flow_statements = true
 
 csharp_space_around_operators = before_and_after
 
@@ -186,6 +205,10 @@ dotnet_naming_symbols.public_internal_fields.applicable_kinds = field
 # private_protected_fields - Define private and protected fields
 dotnet_naming_symbols.private_protected_fields.applicable_accessibilities = private, protected, local
 dotnet_naming_symbols.private_protected_fields.applicable_kinds = field, local
+
+# local_members - Define private and protected fields
+dotnet_naming_symbols.local_members.applicable_accessibilities = local
+dotnet_naming_symbols.local_members.applicable_kinds = local
 
 # public_symbols - Define any public symbol
 dotnet_naming_symbols.public_symbols.applicable_accessibilities = public, internal, protected, protected_internal
@@ -253,6 +276,7 @@ dotnet_naming_style.prefix_private_fields_and_local_members_with_underscore.capi
 dotnet_naming_style.prefix_private_fields_and_local_members_with_underscore.required_prefix = _
 
 
+
 ######## Naming Rules Section ######################
 
 # Async methods must be PascalCase and end with an 'Async'
@@ -279,6 +303,11 @@ dotnet_naming_rule.private_readonly_fields_must_be_camel_case.style = prefix_pri
 dotnet_naming_rule.public_internal_fields_must_be_pascal_case.severity = error
 dotnet_naming_rule.public_internal_fields_must_be_pascal_case.symbols = public_internal_fields
 dotnet_naming_rule.public_internal_fields_must_be_pascal_case.style = pascal_case_style
+
+# Local members must be camelCase
+dotnet_naming_rule.local_members_must_be_camel_case.severity = error
+dotnet_naming_rule.local_members_must_be_camel_case.symbols = local_members
+dotnet_naming_rule.local_members_must_be_camel_case.style = camel_case_style
 
 # Private and protected fields and locals must be camelCase
 dotnet_naming_rule.private_protected_fields_and_locals_must_be_camel_case.severity = error
@@ -780,12 +809,34 @@ csharp_place_linq_into_on_new_line = true
 ## Arrangement of interpolated strings
 csharp_wrap_verbatim_interpolated_strings = no_wrap
 
+# Would need a new codefix option “leave_unused” so that code generation does not emit a discard or variable.
+csharp_style_unused_value_expression_statement_preference = leave_unused:error
+# Would need a new option which applies only to Task expressions to allow discard to be used when suppressing CS4014
+csharp_style_unused_value_expression_task_statement_preference = discard_variable:error
+# Would need a new option which only applies to getter invocations which requires an assignment operator
+csharp_style_unused_value_expression_getter_statement_preference = discard_variable:error
+# Would need a new codefix option “remove_lhs_and_operator” or something so that both discard and unused variable can be removed via a codefix
+csharp_style_unused_value_assignment_preference = remove_lhs_and_operator:error
+
 
 ###############################################
 # Other                                       #
 ###############################################
 
 csharp_old_engine = false
+csharp_using_directive_placement = outside_namespace:silent
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_style_prefer_method_group_conversion = true:silent
+csharp_style_prefer_top_level_statements = true:silent
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_style_expression_bodied_methods = false:silent
+csharp_style_expression_bodied_constructors = false:silent
+csharp_style_expression_bodied_operators = false:silent
+csharp_style_expression_bodied_properties = true:silent
+csharp_style_expression_bodied_indexers = true:silent
+csharp_style_expression_bodied_accessors = true:silent
+csharp_style_expression_bodied_lambdas = true:silent
+csharp_style_expression_bodied_local_functions = false:silent
 
 [*.json]
 indent_size = 2
