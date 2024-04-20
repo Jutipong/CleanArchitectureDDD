@@ -800,7 +800,7 @@ csharp_place_linq_into_on_new_line = true
 csharp_wrap_verbatim_interpolated_strings = no_wrap
 
 # Would need a new codefix option “leave_unused” so that code generation does not emit a discard or variable.
-csharp_style_unused_value_expression_statement_preference = leave_unused:error
+csharp_style_unused_value_expression_statement_preference = leave_unused:waring
 # Would need a new option which applies only to Task expressions to allow discard to be used when suppressing CS4014
 csharp_style_unused_value_expression_task_statement_preference = discard_variable:error
 # Would need a new option which only applies to getter invocations which requires an assignment operator
@@ -814,19 +814,6 @@ csharp_style_unused_value_assignment_preference = remove_lhs_and_operator:error
 ###############################################
 
 csharp_old_engine = false
-csharp_using_directive_placement = outside_namespace:silent
-csharp_prefer_simple_using_statement = true:suggestion
-csharp_style_prefer_method_group_conversion = true:silent
-csharp_style_prefer_top_level_statements = true:silent
-csharp_style_prefer_primary_constructors = true:suggestion
-csharp_style_expression_bodied_methods = false:silent
-csharp_style_expression_bodied_constructors = false:silent
-csharp_style_expression_bodied_operators = false:silent
-csharp_style_expression_bodied_properties = true:silent
-csharp_style_expression_bodied_indexers = true:silent
-csharp_style_expression_bodied_accessors = true:silent
-csharp_style_expression_bodied_lambdas = true:silent
-csharp_style_expression_bodied_local_functions = false:silent
 
 [*.json]
 indent_size = 2
