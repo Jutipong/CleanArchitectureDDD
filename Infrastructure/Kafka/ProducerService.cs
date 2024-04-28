@@ -1,7 +1,7 @@
+using System.Reflection;
 using Application.Abstractions.Kafka;
 using Confluent.Kafka;
 using Domain.Abstractions;
-using Domain.Helper;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Kafka;
@@ -15,13 +15,13 @@ public class ProducerService : IProducerService
     {
         _logger = logger;
 
-        var producerConfig = new ProducerConfig { BootstrapServers = appSetting.Kafka.Producer.BootstrapServers };
+        var producerConfig = new ProducerConfig { BootstrapServers = appSetting.Kafka.Producer.BootstrapServers, MessageTimeoutMs = 30 };
         _producer = new ProducerBuilder<Null, string>(producerConfig).Build();
     }
 
     public async Task ProduceAsync(string topic, string message)
     {
-        var funcName = MethodBaseExtension.GetName;
+        var funcName = MethodBase.GetCurrentMethod()?.FuncName();
 
         _logger.LogInformation("Start Function:{FuncName}, Topic:{Topic}, Message:{Message}", funcName, topic, message);
 
@@ -34,6 +34,8 @@ public class ProducerService : IProducerService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error Function:{Function}, Topic:{Topic}, Message:{Message}", funcName, topic, message);
+
+            throw;
         }
     }
 }

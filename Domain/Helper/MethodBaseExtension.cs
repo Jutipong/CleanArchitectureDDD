@@ -5,7 +5,7 @@ namespace Domain.Helper;
 
 public static class MethodBaseExtension
 {
-    public static string GetName(this MethodBase methodBase, [CallerMemberName] string memberName = "")
+    public static string FuncName(this MethodBase methodBase, [CallerMemberName] string memberName = "")
     {
         return methodBase is null ? throw new ArgumentNullException(nameof(methodBase)) : memberName;
     }

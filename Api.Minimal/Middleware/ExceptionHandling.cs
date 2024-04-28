@@ -3,26 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Minimal.Middleware;
 
-public class ExceptionHandling
+public class ExceptionHandling(RequestDelegate next, ILogger<ExceptionHandling> logger)
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionHandling> _logger;
-
-    public ExceptionHandling(RequestDelegate next, ILogger<ExceptionHandling> logger)
-    {
-        _next = next;
-        _logger = logger;
-    }
-
     public async Task InvokeAsync(HttpContext context)
     {
         try
         {
-            await _next(context);
+            await next(context);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Exception occurred: {Message}", ex.Message);
+            logger.LogError(ex, "Exception occurred: {Message}", ex.Message);
 
             var exceptionDetails = GetExceptionDetails(ex);
 
@@ -68,5 +59,5 @@ public class ExceptionHandling
         };
     }
 
-    internal record ExceptionDetails(int Status, string Type, string Title, string Detail, IEnumerable<object>? Errors);
+    private record ExceptionDetails(int Status, string Type, string Title, string Detail, IEnumerable<object>? Errors);
 }
