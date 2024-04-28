@@ -1,17 +1,15 @@
+using Application.Abstractions.Kafka;
+
 namespace Application.Customer.Inquiry;
 
-internal class InquiryCustomerHandler : IRequestHandlerResult<InquiryCustomerQuery>
+internal class InquiryCustomerHandler(ICustomerRepository customerRepository, IProducerService producerService)
+    : IRequestHandlerResult<InquiryCustomerQuery>
 {
-    private readonly ICustomerRepository _customerRepository;
-
-    public InquiryCustomerHandler(ICustomerRepository customerRepository)
-    {
-        _customerRepository = customerRepository;
-    }
-
     public async Task<Result> Handle(InquiryCustomerQuery request, CancellationToken cancellationToken)
     {
-        var customer = await _customerRepository.Inquiry(request.Name, cancellationToken);
+        var customer = await customerRepository.Inquiry(request.Name, cancellationToken);
+
+        await producerService.ProduceAsync("topic", "message");
 
         return customer.Count != 0 ? Result.Failure(Error.NullValue) : Result.Success(customer);
     }
