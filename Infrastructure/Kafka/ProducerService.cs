@@ -1,4 +1,3 @@
-using System.Reflection;
 using Application.Abstractions.Kafka;
 using Confluent.Kafka;
 using Domain.Abstractions;
@@ -15,7 +14,7 @@ public class ProducerService : IProducerService
     {
         _logger = logger;
 
-        var producerConfig = new ProducerConfig { BootstrapServers = appSetting.Kafka.Producer.BootstrapServers, MessageTimeoutMs = 30 };
+        var producerConfig = new ProducerConfig { BootstrapServers = appSetting.Kafka.BootstrapServers, MessageTimeoutMs = 30 };
         _producer = new ProducerBuilder<Null, string>(producerConfig).Build();
     }
 
@@ -33,7 +32,7 @@ public class ProducerService : IProducerService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error Function:{Function}, Topic:{Topic}, Message:{Message}", funcName, topic, message);
+            _logger.LogError(ex, "Error Function:{Function}, Topic:{Topic}, Message:{Message}, {Exception}", funcName, topic, message, ex);
 
             throw;
         }
