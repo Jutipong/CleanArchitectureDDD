@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Databases.SqlServer;
 
-namespace Infrastructure.Repository;
+namespace Infrastructure.Repositorys;
 
 public abstract class RepositoryBase<TEntity>
     where TEntity : class

@@ -4,7 +4,7 @@ using Domain.Interfaces;
 using Infrastructure.Databases.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repository;
+namespace Infrastructure.Repositorys;
 
 public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
 {

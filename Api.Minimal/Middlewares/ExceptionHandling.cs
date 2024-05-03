@@ -1,7 +1,7 @@
 using Application.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Minimal.Middleware;
+namespace Api.Minimal.Middlewares;
 
 public class ExceptionHandling(RequestDelegate next, ILogger<ExceptionHandling> logger)
 {

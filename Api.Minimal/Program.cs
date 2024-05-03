@@ -1,5 +1,5 @@
 using Api.Minimal.Extensions;
-using Api.Minimal.Middleware;
+using Api.Minimal.Middlewares;
 using Application;
 using Domain.Abstractions;
 using Infrastructure;
