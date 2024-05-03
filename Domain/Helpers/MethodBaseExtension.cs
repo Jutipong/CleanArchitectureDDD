@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Domain.Helper;
+namespace Domain.Helpers;
 
 public static class MethodBaseExtension
 {
