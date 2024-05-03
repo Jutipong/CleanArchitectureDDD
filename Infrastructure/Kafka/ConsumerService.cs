@@ -57,6 +57,8 @@ public class ConsumerService
         catch (Exception ex)
         {
             _logger.LogError("Error Function:{Function}, {ExMessage}", funcName, ex.Message);
+
+            throw;
         }
     }
 }
