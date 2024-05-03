@@ -1,5 +1,3 @@
-using Application.Abstractions.Kafka;
-
 namespace Application.Customer.Inquiry;
 
 internal class InquiryCustomerHandler(ICustomerRepository customerRepository, IProducerService producerService)

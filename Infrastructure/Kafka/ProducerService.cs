@@ -1,6 +1,6 @@
-using Application.Abstractions.Kafka;
 using Confluent.Kafka;
 using Domain.Abstractions;
+using Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Kafka;

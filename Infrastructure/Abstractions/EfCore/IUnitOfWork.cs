@@ -1,4 +1,4 @@
-using Domain.Abstractions;
+using Domain.Interfaces;
 using Infrastructure.Databases.SqlServer;
 
 namespace Infrastructure.Abstractions.EfCore;

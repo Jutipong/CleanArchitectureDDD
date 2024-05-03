@@ -1,4 +1,4 @@
-namespace Application.Abstractions.Kafka;
+namespace Domain.Interfaces;
 
 public interface IProducerService
 {

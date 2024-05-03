@@ -1,4 +1,5 @@
 using System.Data;
+using Domain.Interfaces;
 using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Abstractions.Dapper;

@@ -1,6 +1,5 @@
 using System.Reflection;
-using Application.Abstractions.Kafka;
-using Domain.Abstractions;
+using Domain.Interfaces;
 using Infrastructure.Abstractions.Dapper;
 using Infrastructure.Abstractions.EfCore;
 using Infrastructure.Databases.SqlServer;
@@ -48,7 +47,10 @@ public static class DependencyInjection
         {
             var interfaceType = serviceType.GetInterfaces().FirstOrDefault(type => type.Name.EndsWith(serviceType.Name));
 
-            if (interfaceType != null) { services.AddScoped(interfaceType, serviceType); }
+            if (interfaceType != null)
+            {
+                services.AddScoped(interfaceType, serviceType);
+            }
         }
     }
 }

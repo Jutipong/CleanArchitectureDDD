@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Infrastructure.Abstractions.Dapper;
+namespace Domain.Interfaces;
 
 public interface IDapperConnection
 {
