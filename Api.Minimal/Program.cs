@@ -19,6 +19,9 @@ builder.Services.AddCarter();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Host.UseSerilog(
     (context, configuration) =>
     {
@@ -35,7 +38,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseSerilogRequestLogging();
 app.UseMiddleware<RequestContextLogging>();
-app.UseMiddleware<ExceptionHandling>();
+app.UseExceptionHandler();
 app.MapCarter();
 app.UseHttpsRedirection();
 app.Run();
