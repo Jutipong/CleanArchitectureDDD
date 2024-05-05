@@ -34,6 +34,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSerilogRequestLogging();
+app.UseMiddleware<RequestContextLogging>();
 app.UseMiddleware<ExceptionHandling>();
 app.MapCarter();
 app.UseHttpsRedirection();
