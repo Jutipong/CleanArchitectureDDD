@@ -806,7 +806,7 @@ csharp_style_unused_value_expression_task_statement_preference = discard_variabl
 # Would need a new option which only applies to getter invocations which requires an assignment operator
 csharp_style_unused_value_expression_getter_statement_preference = discard_variable:error
 # Would need a new codefix option “remove_lhs_and_operator” or something so that both discard and unused variable can be removed via a codefix
-csharp_style_unused_value_assignment_preference = remove_lhs_and_operator:error
+csharp_style_unused_value_assignment_preference = remove_lhs_and_operator:waring
 
 
 ###############################################
