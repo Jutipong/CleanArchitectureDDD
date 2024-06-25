@@ -1,17 +1,17 @@
 namespace Application.Customer.Update;
 
-internal sealed class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand, bool>
+internal sealed class CustomerUpdateHandler : IRequestHandler<CustomerUpdateCommand, bool>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICustomerRepository _customerRepository;
 
-    public UpdateCustomerHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
+    public CustomerUpdateHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
     {
         _unitOfWork = unitOfWork;
         _customerRepository = customerRepository;
     }
 
-    public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CustomerUpdateCommand request, CancellationToken cancellationToken)
     {
         var customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
 

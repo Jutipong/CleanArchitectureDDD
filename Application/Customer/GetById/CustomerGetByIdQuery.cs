@@ -1,3 +1,3 @@
 namespace Application.Customer.GetById;
 
-public record GetCustomerByIdQuery(Guid Id) : IRequest<Entities.Customer>;
+public record CustomerGetByIdQuery(Guid Id) : IRequest<Entities.Customer>;

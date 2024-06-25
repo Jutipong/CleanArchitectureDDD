@@ -1,6 +1,6 @@
 namespace Application.Customer.Delete;
 
-public class Validate : AbstractValidator<DeleteCustomerCommand>
+public class Validate : AbstractValidator<CustomerDeleteCommand>
 {
     public Validate()
     {

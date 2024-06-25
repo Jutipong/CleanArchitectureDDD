@@ -19,7 +19,7 @@ public class CustomerEndpoint : CarterModule
     {
         app.MapPost(
             "/Create",
-            async (ISender sender, CreateCustomerCommand req, CancellationToken token) =>
+            async (ISender sender, CustomerCreateCommand req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;
@@ -28,7 +28,7 @@ public class CustomerEndpoint : CarterModule
 
         app.MapPut(
             "/Update",
-            async (ISender sender, UpdateCustomerCommand req, CancellationToken cancellationToken) =>
+            async (ISender sender, CustomerUpdateCommand req, CancellationToken cancellationToken) =>
             {
                 var result = await sender.Send(req, cancellationToken);
                 return result;
@@ -39,7 +39,7 @@ public class CustomerEndpoint : CarterModule
             "/Delete{id}",
             async (ISender sender, Guid id, CancellationToken token) =>
             {
-                var result = await sender.Send(new DeleteCustomerCommand(id), token);
+                var result = await sender.Send(new CustomerDeleteCommand(id), token);
                 return result;
             }
         );
@@ -48,14 +48,14 @@ public class CustomerEndpoint : CarterModule
             "/GetById/{id}",
             async (ISender sender, Guid id, CancellationToken token) =>
             {
-                var result = await sender.Send(new GetCustomerByIdQuery(id), token);
+                var result = await sender.Send(new CustomerGetByIdQuery(id), token);
                 return result;
             }
         );
 
         app.MapPost(
             "/Inquiry",
-            async (ISender sender, InquiryCustomerQuery req, CancellationToken token) =>
+            async (ISender sender, CustomerInquiryQuery req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;
