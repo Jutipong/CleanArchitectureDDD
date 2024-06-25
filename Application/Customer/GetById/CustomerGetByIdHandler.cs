@@ -1,18 +1,19 @@
+using Domain.Interfaces.Customer;
+
 namespace Application.Customer.GetById;
 
 internal sealed class CustomerGetByIdHandler : IRequestHandler<CustomerGetByIdQuery, Entities.Customer?>
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ICustomerGetByIdRepository _repo;
 
-    public CustomerGetByIdHandler(ICustomerRepository customerRepository)
+    public CustomerGetByIdHandler(ICustomerGetByIdRepository repo)
     {
-        _customerRepository = customerRepository;
+        _repo = repo;
     }
 
     public async Task<Entities.Customer?> Handle(CustomerGetByIdQuery request, CancellationToken token)
     {
-        var customer = await _customerRepository.GetCustomerById(request.Id, token);
-
+        var customer = await _repo.CustomerGetById(request.Id, token);
         return customer;
     }
 }

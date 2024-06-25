@@ -1,21 +1,23 @@
+using Domain.Interfaces.Customer;
+
 namespace Application.Customer.Delete;
 
 internal sealed class CustomerDeleteHandler : IRequestHandler<CustomerDeleteCommand, bool>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ICustomerDeleteRepository _repo;
 
-    public CustomerDeleteHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
+    public CustomerDeleteHandler(IUnitOfWork unitOfWork, ICustomerDeleteRepository repo)
     {
         _unitOfWork = unitOfWork;
-        _customerRepository = customerRepository;
+        _repo = repo;
     }
 
-    public async Task<bool> Handle(CustomerDeleteCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CustomerDeleteCommand request, CancellationToken token)
     {
-        _customerRepository.DeleteCustomer(request.Id, cancellationToken);
+        _repo.DeleteCustomer(request.Id, token);
 
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _unitOfWork.SaveChangesAsync(token);
 
         return true;
     }

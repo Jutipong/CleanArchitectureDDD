@@ -1,6 +1,6 @@
 namespace Application.Customer.TestMockData;
 
-public class Validate : AbstractValidator<DapperHandlerQuery>
+public class Validate : AbstractValidator<CustomerDapperHandlerQuery>
 {
     public Validate()
     {

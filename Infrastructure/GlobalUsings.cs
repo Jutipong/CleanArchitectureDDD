@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Infrastructure;
-
-internal class GlobalUsings { }
+global using Infrastructure.Databases.SqlServer;
+global using Microsoft.EntityFrameworkCore;
+global using Entities = Domain.Entities;

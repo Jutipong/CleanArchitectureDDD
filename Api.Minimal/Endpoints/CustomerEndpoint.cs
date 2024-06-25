@@ -64,7 +64,7 @@ public class CustomerEndpoint : CarterModule
 
         app.MapPost(
             "/Demo_EfCore_Dapper",
-            async (ISender sender, DapperHandlerQuery req, CancellationToken token) =>
+            async (ISender sender, CustomerDapperHandlerQuery req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;
