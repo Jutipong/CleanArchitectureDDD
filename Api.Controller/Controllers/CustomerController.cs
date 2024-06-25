@@ -13,42 +13,48 @@ public class CustomerController(ISender sender) : ControllerBase
 {
     private readonly ISender _sender = sender;
 
-    [HttpPost(Name = "Create")]
+    [HttpPost]
+    [Route("Create")]
     public async Task<ActionResult> CreateAsync(CustomerCreateCommand req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
         return Ok(result);
     }
 
-    [HttpPost(Name = "Update")]
+    [HttpPost]
+    [Route("Update")]
     public async Task<ActionResult> UpdateAsync(CustomerUpdateCommand req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
         return Ok(result);
     }
 
-    [HttpDelete("{id}", Name = "Delete")]
+    [HttpDelete]
+    [Route("Delete")]
     public async Task<ActionResult> DeleteAsync(Guid id, CancellationToken token)
     {
         var result = await _sender.Send(new CustomerDeleteCommand(id), token);
         return Ok(result);
     }
 
-    [HttpGet("{id}", Name = "GetById")]
+    [HttpGet]
+    [Route("GetById/{id}")]
     public async Task<ActionResult> GetByIdAsync(Guid id, CancellationToken token)
     {
         var result = await _sender.Send(new CustomerGetByIdQuery(id), token);
         return Ok(result);
     }
 
-    [HttpPost(Name = "Inquiry")]
+    [HttpPost]
+    [Route("Inquiry")]
     public async Task<ActionResult> InquiryAsync(CustomerInquiryQuery req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
         return Ok(result);
     }
 
-    [HttpPost(Name = "Demo_EfCore_Dapper")]
+    [HttpPost]
+    [Route("Demo_EfCore_Dapper")]
     public async Task<ActionResult> DemoEfCoreDapperAsync(CustomerDapperHandlerQuery req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
