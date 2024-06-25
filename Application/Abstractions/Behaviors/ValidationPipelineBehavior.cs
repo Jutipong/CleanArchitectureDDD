@@ -1,4 +1,4 @@
-﻿using Application.Abstractions.Exceptions;
+using Application.Abstractions.Exceptions;
 
 namespace Application.Abstractions.Behaviors;
 
