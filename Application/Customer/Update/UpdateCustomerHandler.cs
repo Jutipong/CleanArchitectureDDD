@@ -1,15 +1,23 @@
 namespace Application.Customer.Update;
 
-internal sealed class UpdateCustomerHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
-    : ICommandHandler<UpdateCustomerCommand>
+internal sealed class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand, bool>
 {
-    public async Task<Result> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICustomerRepository _customerRepository;
+
+    public UpdateCustomerHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
     {
-        var customer = await customerRepository.GetCustomerById(request.Id, cancellationToken);
+        _unitOfWork = unitOfWork;
+        _customerRepository = customerRepository;
+    }
+
+    public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+    {
+        var customer = await _customerRepository.GetCustomerById(request.Id, cancellationToken);
 
         if (customer is null)
         {
-            return Result.Failure(Error.DataNotFound);
+            return false;
         }
 
         customer.Code = request.Code;
@@ -17,8 +25,8 @@ internal sealed class UpdateCustomerHandler(IUnitOfWork unitOfWork, ICustomerRep
         customer.Email = request.Email;
         customer.Age = request.Age;
 
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return Result.Success();
+        return true;
     }
 }

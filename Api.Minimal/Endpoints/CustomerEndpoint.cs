@@ -19,14 +19,14 @@ public class CustomerEndpoint : CarterModule
     {
         app.MapPost(
             "/Create",
-            async (ISender sender, CreateCustomerCommand req, CancellationToken cancellationToken) =>
+            async (ISender sender, CreateCustomerCommand req, CancellationToken token) =>
             {
-                var result = await sender.Send(req, cancellationToken);
+                var result = await sender.Send(req, token);
                 return result;
             }
         );
 
-        app.MapPost(
+        app.MapPut(
             "/Update",
             async (ISender sender, UpdateCustomerCommand req, CancellationToken cancellationToken) =>
             {
@@ -35,38 +35,38 @@ public class CustomerEndpoint : CarterModule
             }
         );
 
-        app.MapPost(
-            "/Delete",
-            async (ISender sender, DeleteCustomerCommand req, CancellationToken cancellationToken) =>
+        app.MapDelete(
+            "/Delete{id}",
+            async (ISender sender, Guid id, CancellationToken token) =>
             {
-                var result = await sender.Send(req, cancellationToken);
+                var result = await sender.Send(new DeleteCustomerCommand(id), token);
                 return result;
             }
         );
 
         app.MapGet(
             "/GetById/{id}",
-            async (ISender sender, Guid id, CancellationToken cancellationToken) =>
+            async (ISender sender, Guid id, CancellationToken token) =>
             {
-                var result = await sender.Send(new GetCustomerByIdQuery(id), cancellationToken);
+                var result = await sender.Send(new GetCustomerByIdQuery(id), token);
                 return result;
             }
         );
 
         app.MapPost(
             "/Inquiry",
-            async (ISender sender, InquiryCustomerQuery req, CancellationToken cancellationToken) =>
+            async (ISender sender, InquiryCustomerQuery req, CancellationToken token) =>
             {
-                var result = await sender.Send(req, cancellationToken);
+                var result = await sender.Send(req, token);
                 return result;
             }
         );
 
-        app.MapGet(
+        app.MapPost(
             "/Demo_EfCore_Dapper",
-            async (ISender sender, CancellationToken cancellationToken) =>
+            async (ISender sender, DapperHandlerQuery req, CancellationToken token) =>
             {
-                var result = await sender.Send(new TestDapperHandlerQuery(""), cancellationToken);
+                var result = await sender.Send(req, token);
                 return result;
             }
         );

@@ -1,8 +1,8 @@
 namespace Application.Customer.Update;
 
-public class UpdateCustomerCommand : ICommand
+public class UpdateCustomerCommand : IRequest<bool>
 {
-    public Guid Id { get; init; }
+    public Guid Id { get; set; }
     public string Code { get; init; } = string.Empty;
     public string Name { get; init; } = string.Empty;
     public short? Age { get; init; }

@@ -1,15 +1,24 @@
+using Mapster;
+
 namespace Application.Customer.Create;
 
-internal sealed class CreateCustomerHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
-    : ICommandHandler<CreateCustomerCommand, Guid>
+internal sealed class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, Guid>
 {
-    public async Task<Result<Guid>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICustomerRepository _customerRepository;
+
+    public CreateCustomerHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
     {
-        var customerId = await customerRepository.CreateCustomer(request.Adapt<Entities.Customer>(), cancellationToken);
+        _unitOfWork = unitOfWork;
+        _customerRepository = customerRepository;
+    }
 
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+    public async Task<Guid> Handle(CreateCustomerCommand req, CancellationToken token)
+    {
+        var customerId = await _customerRepository.CreateCustomer(req.Adapt<Entities.Customer>(), token);
 
-        var result = Result.Success(customerId);
-        return result;
+        await _unitOfWork.SaveChangesAsync(token);
+
+        return customerId;
     }
 }
