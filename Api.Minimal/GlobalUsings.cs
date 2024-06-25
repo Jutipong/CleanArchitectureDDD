@@ -1,2 +1,2 @@
-﻿global using Carter;
+global using Carter;
 global using MediatR;
