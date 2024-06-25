@@ -1,6 +1,5 @@
-﻿global using Application.Abstractions.Messaging;
+global using Application.Abstractions.Messaging;
 global using Domain.Abstractions;
-global using Domain.Dtos;
 global using Domain.Interfaces;
 global using FluentValidation;
 global using Mapster;

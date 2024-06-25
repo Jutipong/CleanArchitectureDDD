@@ -103,7 +103,7 @@ public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     }
 
     //test
-    public async Task<(List<Customer>, int)> ToDataTable(
+    public async Task<(List<Customer>, int)> ToDataTableAsync(
         string sorting,
         string ordering,
         int page,

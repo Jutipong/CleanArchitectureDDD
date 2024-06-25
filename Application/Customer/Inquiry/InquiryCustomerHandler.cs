@@ -1,5 +1,3 @@
-using Application.Abstractions.Messaging;
-
 namespace Application.Customer.Inquiry;
 
 public class InquiryCustomerHandler(ICustomerRepository customerRepository) : IQueryHandler<InquiryCustomerQuery, List<Entities.Customer>>
