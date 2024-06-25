@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Minimal", "Api.Minimal\Api.Minimal.csproj", "{0C9FA741-1676-41A6-B6AE-345F89DB3B18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Controller", "api.controller\Api.Controller.csproj", "{253CA83D-562F-462D-9869-84824BB6A772}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Controller", "Api.Controller\Api.Controller.csproj", "{253CA83D-562F-462D-9869-84824BB6A772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
