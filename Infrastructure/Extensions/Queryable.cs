@@ -1,7 +1,6 @@
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure;
+namespace Infrastructure.Extensions;
 
 public static class QueryableExtensions
 {
@@ -31,7 +30,7 @@ public static class QueryableExtensions
         return !value.HasValue ? query.Where(predicate) : query;
     }
 
-    public static async Task<(List<T>, int)> ToSkipTake<T>(
+    public static async Task<(List<T>, int)> ToSkipTakeAsync<T>(
         this IQueryable<T> source,
         int skip,
         int take,
@@ -44,7 +43,7 @@ public static class QueryableExtensions
         return (items, total);
     }
 
-    public static async Task<(List<T>, int)> ToPage<T>(
+    public static async Task<(List<T>, int)> ToPageAsync<T>(
         this IQueryable<T> source,
         int page,
         int size,

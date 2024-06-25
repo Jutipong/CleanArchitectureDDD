@@ -2,8 +2,6 @@ using System.Reflection;
 using Domain.Abstractions;
 using Infrastructure.Abstractions.Dapper;
 using Infrastructure.Abstractions.EfCore;
-using Infrastructure.Databases.SqlServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +23,6 @@ public static class DependencyInjection
     private static void AddPersistenceEfCore(IServiceCollection services, string sqlConnection)
     {
         services.AddDbContext<SqlContext>(options => options.UseSqlServer(sqlConnection, option => option.UseCompatibilityLevel(120)));
-
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 

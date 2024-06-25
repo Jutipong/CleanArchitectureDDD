@@ -1,6 +1,6 @@
 using Domain.Interfaces.Customer;
 
-namespace Application.Customer.TestMockData;
+namespace Application.Customer.Dapper;
 
 internal class CustomerDapperHandler : IRequestHandler<CustomerDapperHandlerQuery, Result<List<Entities.Customer>>>
 {

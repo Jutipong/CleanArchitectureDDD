@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums;
 
-public enum Level
+public enum LevelEnum
 {
     None = 0,
     Low = 1,
