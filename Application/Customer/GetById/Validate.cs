@@ -1,6 +1,6 @@
 namespace Application.Customer.GetById;
 
-public class Validate : AbstractValidator<GetCustomerByIdQuery>
+public class Validate : AbstractValidator<CustomerGetByIdQuery>
 {
     public Validate()
     {

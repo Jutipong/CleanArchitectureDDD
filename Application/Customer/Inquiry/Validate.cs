@@ -1,6 +1,6 @@
 namespace Application.Customer.Inquiry;
 
-public class Validate : AbstractValidator<InquiryCustomerQuery>
+public class Validate : AbstractValidator<CustomerInquiryQuery>
 {
     public Validate()
     {
