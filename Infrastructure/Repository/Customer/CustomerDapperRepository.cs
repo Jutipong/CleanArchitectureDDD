@@ -14,6 +14,12 @@ public class CustomerDapperRepository(IDapperConnection dapperContext, SqlContex
     {
         // generate thread sleep 10sec
         var customer = await _dbContext.Database.SqlQuery<Entities.Customer>($"Select * From Customer").ToListAsync(token);
+
+        //call store procedure with 2 param id and name
+        // var id = new SqlParameter("@Id", 1);
+        // var name = new SqlParameter("@Name", "Test");
+        // var customer = await _dbContext.Database.SqlQuery<Entities.Customer>("GetCustomer @Id, @Name", id, name).ToListAsync(token);
+
         return customer;
     }
 
