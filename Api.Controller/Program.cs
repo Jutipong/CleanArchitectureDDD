@@ -1,6 +1,5 @@
 using Api.Controller.Extensions;
 using Api.Controller.Middleware;
-using Api.Minimal.Middleware;
 using Application;
 using Domain.Abstractions;
 using Infrastructure;

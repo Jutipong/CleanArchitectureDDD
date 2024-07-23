@@ -2,7 +2,6 @@
     "recommendations": [
         "editorconfig.editorconfig",
         "ms-dotnettools.csharp",
-        "adrianwilczynski.namespace",
         "streetsidesoftware.code-spell-checker",
         "roonie007.hide-files",
         "ms-dotnettools.vscodeintellicode-csharp",

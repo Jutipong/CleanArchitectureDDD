@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 
 namespace Api.Controller.Extensions;
 
-public static class ServiceCollection
+public static class SwaggerExtensions
 {
-    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    public static IServiceCollection AddSwagger(this IServiceCollection services, bool isControllerApi = false)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>
@@ -53,6 +54,20 @@ public static class ServiceCollection
                     }
                 }
             );
+
+            if (isControllerApi)
+            {
+                // For use Controller
+                c.TagActionsBy(api =>
+                {
+                    return api.GroupName != null
+                        ? ([api.GroupName])
+                        : api.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
+                            ? (IList<string>)([controllerActionDescriptor.ControllerName])
+                            : throw new InvalidOperationException("Unable to determine tag for endpoint.");
+                });
+                c.DocInclusionPredicate((name, api) => true);
+            }
         });
 
         return services;

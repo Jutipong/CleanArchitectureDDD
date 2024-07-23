@@ -1,6 +1,6 @@
 using Serilog.Context;
 
-namespace Api.Minimal.Middleware;
+namespace Api.Controller.Middleware;
 
 internal sealed class RequestContextLogging(RequestDelegate next)
 {
