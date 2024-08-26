@@ -1,4 +1,4 @@
-using Domain.Interfaces.Customer;
+using Application.Customer.Create;
 
 namespace Infrastructure.Repository.Customer;
 

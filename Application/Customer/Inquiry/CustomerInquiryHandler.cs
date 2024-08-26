@@ -1,15 +1,13 @@
-using Domain.Interfaces.Customer;
-
 namespace Application.Customer.Inquiry;
 
-public class CustomerInquiryHandler : IRequestHandler<CustomerInquiryQuery, List<Entities.Customer>>
+public interface ICustomerInquiryRepository
 {
-    private readonly ICustomerInquiryRepository _repo;
+    Task<List<Entities.Customer>> Inquiry(string name, CancellationToken cancellationToken);
+}
 
-    public CustomerInquiryHandler(ICustomerInquiryRepository repo)
-    {
-        _repo = repo;
-    }
+public class CustomerInquiryHandler(ICustomerInquiryRepository repo) : IRequestHandler<CustomerInquiryQuery, List<Entities.Customer>>
+{
+    private readonly ICustomerInquiryRepository _repo = repo;
 
     public async Task<List<Entities.Customer>> Handle(CustomerInquiryQuery request, CancellationToken token)
     {

@@ -1,6 +1,11 @@
-using Domain.Interfaces.Customer;
+using Application.Customer.GetById;
 
 namespace Application.Customer.Update;
+
+public interface ICustomerUpdateRepository
+{
+    Task<bool> UpdateCustomer(Entities.Customer customer, CancellationToken token);
+}
 
 internal sealed class CustomerUpdateHandler : IRequestHandler<CustomerUpdateCommand, bool>
 {

@@ -35,6 +35,8 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
+        Console.WriteLine("Auto DI Repositories");
+
         var serviceTypes = assembly.GetTypes().Where(type => type.Name.EndsWith("Repository")).ToList();
 
         foreach (var serviceType in serviceTypes)
@@ -44,7 +46,10 @@ public static class DependencyInjection
             if (interfaceType != null)
             {
                 services.AddScoped(interfaceType, serviceType);
+                Console.WriteLine(interfaceType.Name + " -> " + serviceType.Name);
             }
         }
+
+        Console.WriteLine("Auto DI Repositories Done");
     }
 }

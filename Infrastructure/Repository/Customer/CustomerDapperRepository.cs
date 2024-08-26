@@ -1,5 +1,5 @@
+using Application.Customer.Dapper;
 using Dapper;
-using Domain.Interfaces.Customer;
 using Infrastructure.Abstractions.Dapper;
 
 namespace Infrastructure.Repository.Customer;
