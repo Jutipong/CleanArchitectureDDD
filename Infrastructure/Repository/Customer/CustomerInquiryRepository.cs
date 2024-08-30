@@ -6,7 +6,7 @@ public class CustomerInquiryRepository(SqlContext sqlContext) : ICustomerInquiry
 {
     private readonly SqlContext _dbContext = sqlContext;
 
-    public async Task<List<Entities.Customer>> Inquiry(string name, CancellationToken token)
+    public async Task<List<Entities.Customer>> Inquiry(string? name, CancellationToken token)
     {
         var customers = await _dbContext
             .Customer.Where(customer => string.IsNullOrWhiteSpace(name) || name.Contains(customer.Name!))

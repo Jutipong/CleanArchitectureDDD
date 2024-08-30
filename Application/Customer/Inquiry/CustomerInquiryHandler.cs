@@ -2,7 +2,7 @@ namespace Application.Customer.Inquiry;
 
 public interface ICustomerInquiryRepository
 {
-    Task<List<Entities.Customer>> Inquiry(string name, CancellationToken cancellationToken);
+    Task<List<Entities.Customer>> Inquiry(string? name, CancellationToken cancellationToken);
 }
 
 public class CustomerInquiryHandler(ICustomerInquiryRepository repo) : IRequestHandler<CustomerInquiryQuery, List<Entities.Customer>>
