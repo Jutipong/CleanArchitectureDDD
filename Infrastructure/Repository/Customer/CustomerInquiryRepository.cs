@@ -9,7 +9,7 @@ public class CustomerInquiryRepository(SqlContext sqlContext) : ICustomerInquiry
     public async Task<List<Entities.Customer>> Inquiry(string? name, CancellationToken token)
     {
         var customers = await _dbContext
-            .Customer.Where(customer => string.IsNullOrWhiteSpace(name) || name.Contains(customer.Name!))
+            .Customer.Where(customer => string.IsNullOrWhiteSpace(name) || customer.Name!.Contains(name))
             .AsNoTracking()
             .ToListAsync(token);
 

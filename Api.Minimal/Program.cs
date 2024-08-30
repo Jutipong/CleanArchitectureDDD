@@ -11,7 +11,19 @@ var appConfig = builder.Configuration.GetSection(nameof(AppSettings)).Get<AppSet
 builder.Services.AddSingleton(appConfig);
 
 builder.Services.AddSwagger();
-builder.Services.AddCors();
+
+// builder.Services.AddCors();
+builder.Services.AddCors(option =>
+{
+    var cors = "*"; //appConfig.Corsorigins ?? "*";
+    option.AddPolicy(
+        name: "CorsPolicy",
+        builder =>
+        {
+            builder.WithOrigins(cors).AllowAnyHeader().AllowAnyMethod();
+        }
+    );
+});
 builder.Services.AddCarter();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -27,6 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerEndpoints();
 }
 
+app.UseCors("CorsPolicy");
 app.UseSerilogRequestLogging();
 app.UseMiddleware<RequestContextLogging>();
 app.UseExceptionHandler();

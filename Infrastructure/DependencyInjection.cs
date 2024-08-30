@@ -50,6 +50,8 @@ public static class DependencyInjection
             }
         }
 
+        services.AddScoped<Application.Customer.Select2.IRepository, Repository.Customer.Select2Repository>();
+
         Console.WriteLine("Auto DI Repositories Done");
     }
 }

@@ -5,32 +5,16 @@ namespace Infrastructure.Extensions;
 public static class QueryableExtensions
 {
     // =========================================================== //
-    // ========================== Where ========================== //
-    // =========================================================== //
-    public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, string? value, Expression<Func<T, bool>> predicate)
-    {
-        return !string.IsNullOrWhiteSpace(value) ? query.Where(predicate) : query;
-    }
-
-    public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool? value, Expression<Func<T, bool>> predicate)
-    {
-        return !value.HasValue ? query.Where(predicate) : query;
-    }
-
-    public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, decimal? value, Expression<Func<T, bool>> predicate)
-    {
-        return !value.HasValue ? query.Where(predicate) : query;
-    }
-
-    // =========================================================== //
     // ======================== ToPageList ======================= //
     // =========================================================== //
-    public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, int? value, Expression<Func<T, bool>> predicate)
+
+    public class PageListResponse<T>
     {
-        return !value.HasValue ? query.Where(predicate) : query;
+        public List<T> Items { get; set; } = [];
+        public int Total { get; set; } = 0;
     }
 
-    public static async Task<(List<T>, int)> ToSkipTakeAsync<T>(
+    public static async Task<PageListResponse<T>> ToSkipTakeAsync<T>(
         this IQueryable<T> source,
         int skip,
         int take,
@@ -38,12 +22,12 @@ public static class QueryableExtensions
     )
         where T : class
     {
-        var total = await source.CountAsync(cancellationToken);
+        var total = await source.AsNoTracking().CountAsync(cancellationToken);
         var items = await source.AsNoTracking().Skip(skip).Take(take).ToListAsync(cancellationToken);
-        return (items, total);
+        return new PageListResponse<T> { Items = items, Total = total };
     }
 
-    public static async Task<(List<T>, int)> ToPageAsync<T>(
+    public static async Task<PageListResponse<T>> ToPageAsync<T>(
         this IQueryable<T> source,
         int page,
         int size,
@@ -51,9 +35,9 @@ public static class QueryableExtensions
     )
         where T : class
     {
-        var total = await source.CountAsync(cancellationToken);
+        var total = await source.AsNoTracking().CountAsync(cancellationToken);
         var items = await source.AsNoTracking().Skip((page - 1) * size).Take(size).ToListAsync(cancellationToken);
-        return (items, total);
+        return new PageListResponse<T> { Items = items, Total = total };
     }
 
     // =========================================================== //

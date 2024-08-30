@@ -70,5 +70,14 @@ public class CustomerEndpoint : CarterModule
                 return result;
             }
         );
+
+        app.MapPost(
+            "/MasterSelect2",
+            async (ISender sender, Application.Customer.Select2.Request req, CancellationToken token) =>
+            {
+                var result = await sender.Send(req, token);
+                return result;
+            }
+        );
     }
 }
