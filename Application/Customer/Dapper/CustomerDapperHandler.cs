@@ -1,8 +1,13 @@
-using Domain.Interfaces.Customer;
-
 namespace Application.Customer.Dapper;
 
-internal class CustomerDapperHandler : IRequestHandler<CustomerDapperHandlerQuery, Result<List<Entities.Customer>>>
+public interface ICustomerDapperRepository
+{
+    Task<List<Entities.Customer>> MackCustomerDataEf(CancellationToken cancellationToken);
+    Task<List<Entities.Customer>> MackCustomerDataDapper1(CancellationToken cancellationToken);
+    Task<List<Entities.Customer>> MackCustomerDataDapper2(CancellationToken cancellationToken);
+}
+
+internal sealed class CustomerDapperHandler : IRequestHandler<CustomerDapperHandlerQuery, Result<List<Entities.Customer>>>
 {
     private readonly ICustomerDapperRepository _repo;
 

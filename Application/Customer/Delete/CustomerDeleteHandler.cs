@@ -1,6 +1,9 @@
-using Domain.Interfaces.Customer;
-
 namespace Application.Customer.Delete;
+
+public interface ICustomerDeleteRepository
+{
+    void DeleteCustomer(Guid id, CancellationToken token);
+}
 
 internal sealed class CustomerDeleteHandler : IRequestHandler<CustomerDeleteCommand, bool>
 {

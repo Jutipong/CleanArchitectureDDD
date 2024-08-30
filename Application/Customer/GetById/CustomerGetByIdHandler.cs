@@ -1,6 +1,9 @@
-using Domain.Interfaces.Customer;
-
 namespace Application.Customer.GetById;
+
+public interface ICustomerGetByIdRepository
+{
+    Task<Entities.Customer?> CustomerGetById(Guid id, CancellationToken token);
+}
 
 internal sealed class CustomerGetByIdHandler : IRequestHandler<CustomerGetByIdQuery, Entities.Customer?>
 {

@@ -10,9 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var appConfig = builder.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
 builder.Services.AddSingleton(appConfig);
 
-builder.Host.UseSerilog(
-    (context, configuration) => configuration.ReadFrom.Configuration(context.Configuration).Enrich.FromLogContext().WriteTo.Console()
-);
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddSwagger();
 builder.Services.AddCors();

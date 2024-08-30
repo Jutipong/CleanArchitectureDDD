@@ -1,4 +1,4 @@
-using Domain.Interfaces.Customer;
+using Application.Customer.GetById;
 
 namespace Infrastructure.Repository.Customer;
 

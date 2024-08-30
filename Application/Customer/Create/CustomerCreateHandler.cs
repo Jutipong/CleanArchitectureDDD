@@ -1,7 +1,11 @@
-using Domain.Interfaces.Customer;
 using Mapster;
 
 namespace Application.Customer.Create;
+
+public interface ICustomerCreateRepository
+{
+    Task<Guid> CreateCustomer(Entities.Customer customer, CancellationToken token);
+}
 
 internal sealed class CustomerCreateHandler : IRequestHandler<CustomerCreateCommand, Guid>
 {
