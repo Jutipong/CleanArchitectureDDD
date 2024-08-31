@@ -5,7 +5,7 @@ public interface ICustomerDeleteRepository
     void DeleteCustomer(Guid id, CancellationToken token);
 }
 
-internal sealed class CustomerDeleteHandler : IRequestHandler<CustomerDeleteCommand, bool>
+internal sealed class CustomerDeleteHandler : IRequestHandler<CustomerDeleteRequest, bool>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICustomerDeleteRepository _repo;
@@ -16,7 +16,7 @@ internal sealed class CustomerDeleteHandler : IRequestHandler<CustomerDeleteComm
         _repo = repo;
     }
 
-    public async Task<bool> Handle(CustomerDeleteCommand request, CancellationToken token)
+    public async Task<bool> Handle(CustomerDeleteRequest request, CancellationToken token)
     {
         _repo.DeleteCustomer(request.Id, token);
 

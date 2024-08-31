@@ -7,7 +7,7 @@ public interface ICustomerUpdateRepository
     Task<bool> UpdateCustomer(Entities.Customer customer, CancellationToken token);
 }
 
-internal sealed class CustomerUpdateHandler : IRequestHandler<CustomerUpdateCommand, bool>
+internal sealed class CustomerUpdateHandler : IRequestHandler<CustomerUpdateRequest, bool>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICustomerUpdateRepository _customerUpdateRepository;
@@ -24,7 +24,7 @@ internal sealed class CustomerUpdateHandler : IRequestHandler<CustomerUpdateComm
         _customerGetByIdRepository = customerGetByIdRepository;
     }
 
-    public async Task<bool> Handle(CustomerUpdateCommand req, CancellationToken token)
+    public async Task<bool> Handle(CustomerUpdateRequest req, CancellationToken token)
     {
         var customer = await _customerGetByIdRepository.CustomerGetById(req.Id, token);
         if (customer is null)

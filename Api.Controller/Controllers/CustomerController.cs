@@ -15,7 +15,7 @@ public class CustomerController(ISender sender) : ControllerBase
 
     [HttpPost]
     [Route("Create")]
-    public async Task<ActionResult> CreateAsync(CustomerCreateCommand req, CancellationToken token)
+    public async Task<ActionResult> CreateAsync(CustomerCreateRequest req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
         return Ok(result);
@@ -23,7 +23,7 @@ public class CustomerController(ISender sender) : ControllerBase
 
     [HttpPost]
     [Route("Update")]
-    public async Task<ActionResult> UpdateAsync(CustomerUpdateCommand req, CancellationToken token)
+    public async Task<ActionResult> UpdateAsync(CustomerUpdateRequest req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
         return Ok(result);
@@ -33,7 +33,7 @@ public class CustomerController(ISender sender) : ControllerBase
     [Route("Delete")]
     public async Task<ActionResult> DeleteAsync(Guid id, CancellationToken token)
     {
-        var result = await _sender.Send(new CustomerDeleteCommand(id), token);
+        var result = await _sender.Send(new CustomerDeleteRequest(id), token);
         return Ok(result);
     }
 
@@ -41,13 +41,13 @@ public class CustomerController(ISender sender) : ControllerBase
     [Route("GetById/{id}")]
     public async Task<ActionResult> GetByIdAsync(Guid id, CancellationToken token)
     {
-        var result = await _sender.Send(new CustomerGetByIdQuery(id), token);
+        var result = await _sender.Send(new CustomerGetByIdRequest(id), token);
         return Ok(result);
     }
 
     [HttpPost]
     [Route("Inquiry")]
-    public async Task<ActionResult> InquiryAsync(CustomerInquiryQuery req, CancellationToken token)
+    public async Task<ActionResult> InquiryAsync(CustomerInquiryRequest req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
         return Ok(result);
@@ -55,7 +55,7 @@ public class CustomerController(ISender sender) : ControllerBase
 
     [HttpPost]
     [Route("Demo_EfCore_Dapper")]
-    public async Task<ActionResult> DemoEfCoreDapperAsync(CustomerDapperHandlerQuery req, CancellationToken token)
+    public async Task<ActionResult> DemoEfCoreDapperAsync(CustomerDapperRequest req, CancellationToken token)
     {
         var result = await _sender.Send(req, token);
         return Ok(result);

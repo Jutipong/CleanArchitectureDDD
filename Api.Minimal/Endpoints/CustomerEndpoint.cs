@@ -3,6 +3,7 @@ using Application.Customer.Dapper;
 using Application.Customer.Delete;
 using Application.Customer.GetById;
 using Application.Customer.Inquiry;
+using Application.Customer.Select2;
 using Application.Customer.Update;
 
 namespace Api.Minimal.Endpoints;
@@ -19,7 +20,7 @@ public class CustomerEndpoint : CarterModule
     {
         app.MapPost(
             "/Create",
-            async (ISender sender, CustomerCreateCommand req, CancellationToken token) =>
+            async (ISender sender, CustomerCreateRequest req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;
@@ -28,7 +29,7 @@ public class CustomerEndpoint : CarterModule
 
         app.MapPut(
             "/Update",
-            async (ISender sender, CustomerUpdateCommand req, CancellationToken cancellationToken) =>
+            async (ISender sender, CustomerUpdateRequest req, CancellationToken cancellationToken) =>
             {
                 var result = await sender.Send(req, cancellationToken);
                 return result;
@@ -39,7 +40,7 @@ public class CustomerEndpoint : CarterModule
             "/Delete{id}",
             async (ISender sender, Guid id, CancellationToken token) =>
             {
-                var result = await sender.Send(new CustomerDeleteCommand(id), token);
+                var result = await sender.Send(new CustomerDeleteRequest(id), token);
                 return result;
             }
         );
@@ -48,14 +49,14 @@ public class CustomerEndpoint : CarterModule
             "/GetById/{id}",
             async (ISender sender, Guid id, CancellationToken token) =>
             {
-                var result = await sender.Send(new CustomerGetByIdQuery(id), token);
+                var result = await sender.Send(new CustomerGetByIdRequest(id), token);
                 return result;
             }
         );
 
         app.MapPost(
             "/Inquiry",
-            async (ISender sender, CustomerInquiryQuery req, CancellationToken token) =>
+            async (ISender sender, CustomerInquiryRequest req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;
@@ -64,7 +65,7 @@ public class CustomerEndpoint : CarterModule
 
         app.MapPost(
             "/Demo_EfCore_Dapper",
-            async (ISender sender, CustomerDapperHandlerQuery req, CancellationToken token) =>
+            async (ISender sender, CustomerDapperRequest req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;
@@ -73,7 +74,7 @@ public class CustomerEndpoint : CarterModule
 
         app.MapPost(
             "/MasterSelect2",
-            async (ISender sender, Application.Customer.Select2.Request req, CancellationToken token) =>
+            async (ISender sender, CustomerSelect2Request req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;

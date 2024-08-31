@@ -7,7 +7,7 @@ public interface ICustomerDapperRepository
     Task<List<Entities.Customer>> MackCustomerDataDapper2(CancellationToken cancellationToken);
 }
 
-internal sealed class CustomerDapperHandler : IRequestHandler<CustomerDapperHandlerQuery, Result<List<Entities.Customer>>>
+internal sealed class CustomerDapperHandler : IRequestHandler<CustomerDapperRequest, Result<List<Entities.Customer>>>
 {
     private readonly ICustomerDapperRepository _repo;
 
@@ -16,7 +16,7 @@ internal sealed class CustomerDapperHandler : IRequestHandler<CustomerDapperHand
         _repo = repo;
     }
 
-    public async Task<Result<List<Entities.Customer>>> Handle(CustomerDapperHandlerQuery request, CancellationToken token)
+    public async Task<Result<List<Entities.Customer>>> Handle(CustomerDapperRequest request, CancellationToken token)
     {
         // user ef
         var customers = new List<Entities.Customer>();

@@ -1,6 +1,6 @@
 namespace Application.Customer.Dapper;
 
-public class Validate : AbstractValidator<CustomerDapperHandlerQuery>
+public class Validate : AbstractValidator<CustomerDapperRequest>
 {
     public Validate()
     {

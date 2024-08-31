@@ -7,7 +7,7 @@ public interface ICustomerCreateRepository
     Task<Guid> CreateCustomer(Entities.Customer customer, CancellationToken token);
 }
 
-internal sealed class CustomerCreateHandler : IRequestHandler<CustomerCreateCommand, Guid>
+internal sealed class CustomerCreateHandler : IRequestHandler<CustomerCreateRequest, Guid>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICustomerCreateRepository _repo;
@@ -18,7 +18,7 @@ internal sealed class CustomerCreateHandler : IRequestHandler<CustomerCreateComm
         _repo = repo;
     }
 
-    public async Task<Guid> Handle(CustomerCreateCommand req, CancellationToken token)
+    public async Task<Guid> Handle(CustomerCreateRequest req, CancellationToken token)
     {
         var customerId = await _repo.CreateCustomer(req.Adapt<Entities.Customer>(), token);
 
