@@ -1,9 +1,9 @@
+using Application.Customer.Autocomplete;
 using Application.Customer.Create;
 using Application.Customer.Dapper;
 using Application.Customer.Delete;
 using Application.Customer.GetById;
 using Application.Customer.Inquiry;
-using Application.Customer.Select2;
 using Application.Customer.Update;
 
 namespace Api.Minimal.Endpoints;
@@ -73,8 +73,8 @@ public class CustomerEndpoint : CarterModule
         );
 
         app.MapPost(
-            "/MasterSelect2",
-            async (ISender sender, CustomerSelect2Request req, CancellationToken token) =>
+            "/AutocompleteServer",
+            async (ISender sender, CustomerAutocompleteRequest req, CancellationToken token) =>
             {
                 var result = await sender.Send(req, token);
                 return result;

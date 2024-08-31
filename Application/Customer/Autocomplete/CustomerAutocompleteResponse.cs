@@ -1,6 +1,6 @@
-namespace Application.Customer.Select2;
+namespace Application.Customer.Autocomplete;
 
-public class CustomerSelect2Response
+public class CustomerAutocompleteResponse
 {
     public Guid Id { get; init; } = Guid.Empty;
     public string Text { get; init; } = string.Empty;

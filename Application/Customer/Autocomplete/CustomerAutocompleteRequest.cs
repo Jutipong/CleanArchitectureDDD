@@ -1,6 +1,6 @@
-namespace Application.Customer.Select2;
+namespace Application.Customer.Autocomplete;
 
-public class CustomerSelect2Request : IRequest<List<CustomerSelect2Response>>
+public class CustomerAutocompleteRequest : IRequest<List<CustomerAutocompleteResponse>>
 {
     public string? TextSearch { get; init; }
     public List<Guid>? IdInit { get; init; }
