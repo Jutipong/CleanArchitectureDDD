@@ -2,7 +2,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Api.Minimal.Extensions;
 
-public static class ServiceCollection
+public static class Swagger
 {
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
