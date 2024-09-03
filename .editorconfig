@@ -808,6 +808,9 @@ csharp_style_unused_value_expression_getter_statement_preference = discard_varia
 # Would need a new codefix option “remove_lhs_and_operator” or something so that both discard and unused variable can be removed via a codefix
 csharp_style_unused_value_assignment_preference = remove_lhs_and_operator:waring
 
+# custom by dev
+dotnet_diagnostic.IDE0005.severity = error
+
 
 ###############################################
 # Other                                       #
@@ -818,3 +821,10 @@ csharp_old_engine = false
 [*.json]
 indent_size = 2
 tab_width = 2
+
+###############################################
+# Ignore                                       #
+###############################################
+
+[{**/Entities/**,**/**/SqlServer/**}]
+dotnet_diagnostic.IDE0005.severity = none

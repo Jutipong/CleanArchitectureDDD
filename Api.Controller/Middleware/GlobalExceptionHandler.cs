@@ -1,6 +1,5 @@
 using Application.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controller.Middleware;
 

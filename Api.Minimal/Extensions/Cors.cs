@@ -1,6 +1,4 @@
 using Domain.Consts;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 
 namespace Api.Minimal.Extensions;
 
