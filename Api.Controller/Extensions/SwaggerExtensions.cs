@@ -19,9 +19,9 @@ public static class SwaggerExtensions
                     Version = "v1",
                     Contact = new OpenApiContact
                     {
-                        Name = "[Name]"
+                        Name = "[Name]",
                         // Url = new Uri("")
-                    }
+                    },
                 }
             );
             c.AddSecurityDefinition(
@@ -36,7 +36,7 @@ public static class SwaggerExtensions
                     Description =
                         "JWT Authorization header using the Bearer scheme. \r\n\r\n "
                         + "Enter 'Bearer' [space] and then your token in the text input below. \r\n\r\n"
-                        + "Example: Bearer token"
+                        + "Example: Bearer token",
                 }
             );
             c.AddSecurityRequirement(
@@ -48,10 +48,10 @@ public static class SwaggerExtensions
                             Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" },
                             Scheme = "oauth2",
                             Name = "Bearer",
-                            In = ParameterLocation.Header
+                            In = ParameterLocation.Header,
                         },
                         new List<string>()
-                    }
+                    },
                 }
             );
 
@@ -60,11 +60,10 @@ public static class SwaggerExtensions
                 // For use Controller
                 c.TagActionsBy(api =>
                 {
-                    return api.GroupName != null
-                        ? ([api.GroupName])
+                    return api.GroupName != null ? ([api.GroupName])
                         : api.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
                             ? (IList<string>)([controllerActionDescriptor.ControllerName])
-                            : throw new InvalidOperationException("Unable to determine tag for endpoint.");
+                        : throw new InvalidOperationException("Unable to determine tag for endpoint.");
                 });
                 c.DocInclusionPredicate((name, api) => true);
             }

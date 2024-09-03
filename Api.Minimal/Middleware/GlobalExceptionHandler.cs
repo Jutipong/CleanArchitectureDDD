@@ -18,7 +18,7 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
             Type = exceptionDetails.Type,
             Title = exceptionDetails.Title,
             Detail = exceptionDetails.Detail,
-            Instance = httpContext.Request.Path
+            Instance = httpContext.Request.Path,
         };
 
         if (exceptionDetails.Errors is not null)
@@ -36,22 +36,20 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
     {
         return ex switch
         {
-            ValidationException validationException
-                => new ExceptionDetails(
-                    StatusCodes.Status400BadRequest,
-                    "ValidationFailure",
-                    "Validation error",
-                    "One or more validation failures have occurred.",
-                    validationException.Errors
-                ),
-            _
-                => new ExceptionDetails(
-                    StatusCodes.Status500InternalServerError,
-                    "ServerError",
-                    "Server error",
-                    "An unexpected error occurred.",
-                    null
-                )
+            ValidationException validationException => new ExceptionDetails(
+                StatusCodes.Status400BadRequest,
+                "ValidationFailure",
+                "Validation error",
+                "One or more validation failures have occurred.",
+                validationException.Errors
+            ),
+            _ => new ExceptionDetails(
+                StatusCodes.Status500InternalServerError,
+                "ServerError",
+                "Server error",
+                "An unexpected error occurred.",
+                null
+            ),
         };
     }
 

@@ -18,9 +18,9 @@ public static class Swagger
                     Version = "v1",
                     Contact = new OpenApiContact
                     {
-                        Name = "[Name]"
+                        Name = "[Name]",
                         // Url = new Uri("")
-                    }
+                    },
                 }
             );
             c.AddSecurityDefinition(
@@ -35,7 +35,7 @@ public static class Swagger
                     Description =
                         "JWT Authorization header using the Bearer scheme. \r\n\r\n "
                         + "Enter 'Bearer' [space] and then your token in the text input below. \r\n\r\n"
-                        + "Example: Bearer token"
+                        + "Example: Bearer token",
                 }
             );
             c.AddSecurityRequirement(
@@ -47,10 +47,10 @@ public static class Swagger
                             Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" },
                             Scheme = "oauth2",
                             Name = "Bearer",
-                            In = ParameterLocation.Header
+                            In = ParameterLocation.Header,
                         },
                         new List<string>()
-                    }
+                    },
                 }
             );
         });
