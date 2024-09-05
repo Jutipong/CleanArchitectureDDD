@@ -13,12 +13,14 @@ builder.Services.AddSingleton(appConfig);
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddSwagger();
+builder.Services.AddCorsPolicy(builder.Configuration);
 builder.Services.AddCors();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
+builder.Services.AddJsonOptions();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -26,6 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerEndpoints();
 }
 
+app.UseCorsPolicy();
 app.UseHttpsRedirection();
 app.UseMiddleware<RequestContextLogging>();
 app.UseSerilogRequestLogging();

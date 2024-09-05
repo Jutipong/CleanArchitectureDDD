@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Api.Controller.Extensions;
 
-public static class SwaggerExtensions
+public static class Swagger
 {
     public static IServiceCollection AddSwagger(this IServiceCollection services, bool isControllerApi = false)
     {
@@ -14,8 +14,8 @@ public static class SwaggerExtensions
                 "v1",
                 new OpenApiInfo
                 {
-                    Description = "Minimal API Demo",
-                    Title = "Minimal API Demo",
+                    Description = "Controller API Demo",
+                    Title = "Controller API Demo",
                     Version = "v1",
                     Contact = new OpenApiContact
                     {
