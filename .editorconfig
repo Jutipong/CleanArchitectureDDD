@@ -810,7 +810,7 @@ csharp_style_unused_value_assignment_preference = remove_lhs_and_operator:waring
 
 # custom by dev
 dotnet_diagnostic.IDE0005.severity = error
-
+dotnet_diagnostic.IDE0130.severity = error
 
 ###############################################
 # Other                                       #
