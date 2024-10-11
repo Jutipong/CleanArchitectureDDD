@@ -1,6 +1,6 @@
-namespace Application.Customer.Create;
+namespace Application.Transection.Create;
 
-public record CustomerCreateRequest : IRequest<Guid>
+public record TransectionCreateRequest : IRequest<Entities.Transection>
 {
     public string Code { get; init; } = string.Empty;
     public string Name { get; init; } = string.Empty;
