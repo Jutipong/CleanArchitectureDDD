@@ -14,12 +14,7 @@ public class TransectionUpdateRepository(SqlContext sqlContext) : ITransectionUp
 
             var transation = await _dbContext
                 .Transection.AsNoTracking()
-                .FirstOrDefaultAsync(r => r.TransectionId == transectionId, cancellationToken);
-
-            if (transation == null)
-            {
-                return;
-            }
+                .SingleAsync(r => r.TransectionId == transectionId, cancellationToken);
 
             transation.TransectionId = Guid.NewGuid(); // mock error: https://go.microsoft.com/fwlink/?LinkId=527962
             //transation.Description = $"Updated time: {DateTime.Now}";
