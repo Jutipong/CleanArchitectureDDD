@@ -21,8 +21,10 @@ public class TransectionUpdateRepository(SqlContext sqlContext) : ITransectionUp
                 return;
             }
 
-            //transation.TransectionId = Guid.NewGuid();
-            transation.Description = $"Updated time: {DateTime.Now}";
+            transation.TransectionId = Guid.NewGuid(); // mock error: https://go.microsoft.com/fwlink/?LinkId=527962
+            //transation.Description = $"Updated time: {DateTime.Now}";
+            //transation.No = new Random().Next(1, 100);
+            //transation.CreateDate = DateTime.Now;
 
             _dbContext.Update(transation);
 

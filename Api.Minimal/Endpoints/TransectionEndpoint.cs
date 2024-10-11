@@ -22,11 +22,11 @@ public class TransectionEndpoint : CarterModule
             }
         );
 
-        app.MapPost(
+        app.MapGet(
             "/Update",
-            async (ISender sender, TransectionUpdateRequest req, CancellationToken cancellationToken) =>
+            async (ISender sender, CancellationToken cancellationToken) =>
             {
-                await sender.Send(req, cancellationToken);
+                await sender.Send(new TransectionUpdateRequest(), cancellationToken);
             }
         );
     }
