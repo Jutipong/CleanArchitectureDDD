@@ -8,6 +8,7 @@ public static class Swagger
     public static IServiceCollection AddSwagger(this IServiceCollection services, bool isControllerApi = false)
     {
         services.AddEndpointsApiExplorer();
+
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc(
@@ -24,6 +25,7 @@ public static class Swagger
                     },
                 }
             );
+
             c.AddSecurityDefinition(
                 "Bearer",
                 new OpenApiSecurityScheme
@@ -39,6 +41,7 @@ public static class Swagger
                         + "Example: Bearer token",
                 }
             );
+
             c.AddSecurityRequirement(
                 new OpenApiSecurityRequirement
                 {
@@ -59,13 +62,14 @@ public static class Swagger
             {
                 // For use Controller
                 c.TagActionsBy(api =>
-                {
-                    return api.GroupName != null ? ([api.GroupName])
+                    api.GroupName != null
+                        ? [api.GroupName]
                         : api.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
-                            ? (IList<string>)([controllerActionDescriptor.ControllerName])
-                        : throw new InvalidOperationException("Unable to determine tag for endpoint.");
-                });
-                c.DocInclusionPredicate((name, api) => true);
+                            ? (IList<string>)[controllerActionDescriptor.ControllerName]
+                            : throw new InvalidOperationException("Unable to determine tag for endpoint.")
+                );
+
+                c.DocInclusionPredicate((_, _) => true);
             }
         });
 
@@ -78,6 +82,7 @@ internal static partial class ApplicationBuilder
     public static IApplicationBuilder UseSwaggerEndpoints(this IApplicationBuilder app)
     {
         app.UseSwagger();
+
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
