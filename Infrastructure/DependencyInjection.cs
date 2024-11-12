@@ -15,7 +15,7 @@ public static class DependencyInjection
 
         AddPersistenceEfCore(services, sqlConnection);
         AddPersistenceDapper(services, sqlConnection);
-        AddRepositories(services);
+        //AddRepositories(services);
 
         return services;
     }
@@ -31,23 +31,41 @@ public static class DependencyInjection
         services.AddSingleton<IDapperConnection>(_ => new DapperConnection(sqlConnection));
     }
 
-    private static void AddRepositories(IServiceCollection services)
-    {
-        var assembly = Assembly.GetExecutingAssembly();
+    //private static void AddRepositories(IServiceCollection services)
+    //{
+    //    var assembly = Assembly.GetExecutingAssembly();
 
+    //    Console.WriteLine("Auto DI Repositories");
+
+    //    var serviceTypes = assembly.GetTypes().Where(type => type.Name.EndsWith("Repository")).ToList();
+
+    //    foreach (var serviceType in serviceTypes)
+    //    {
+    //        var interfaceType = serviceType.GetInterfaces().FirstOrDefault(type => type.Name.EndsWith(serviceType.Name));
+
+    //        if (interfaceType != null)
+    //        {
+    //            services.AddScoped(interfaceType, serviceType);
+    //            Console.WriteLine(interfaceType.Name + " -> " + serviceType.Name);
+    //        }
+    //    }
+
+    //    Console.WriteLine("Auto DI Repositories Done");
+    //}
+
+    private static void AddRepository(this IServiceCollection services, Assembly assembly)
+    {
         Console.WriteLine("Auto DI Repositories");
 
-        var serviceTypes = assembly.GetTypes().Where(type => type.Name.EndsWith("Repository")).ToList();
+        var serviceTypes = assembly
+            .GetTypes()
+            .Where(type => type.Name.EndsWith("Repository") && type.GetInterfaces().Any(i => i.Name.EndsWith(type.Name)))
+            .ToList();
 
         foreach (var serviceType in serviceTypes)
         {
-            var interfaceType = serviceType.GetInterfaces().FirstOrDefault(type => type.Name.EndsWith(serviceType.Name));
-
-            if (interfaceType != null)
-            {
-                services.AddScoped(interfaceType, serviceType);
-                Console.WriteLine(interfaceType.Name + " -> " + serviceType.Name);
-            }
+            var interfaceType = serviceType.GetInterfaces().First(type => type.Name.EndsWith(serviceType.Name));
+            services.AddSingleton(interfaceType, serviceType);
         }
 
         Console.WriteLine("Auto DI Repositories Done");
