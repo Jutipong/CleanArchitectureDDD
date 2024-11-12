@@ -1,6 +1,6 @@
 using Application.Customer.Delete;
 
-namespace Infrastructure.Repository.Customer;
+namespace Infrastructure.Repositories.Customer;
 
 public class CustomerDeleteRepository(SqlContext sqlContext) : ICustomerDeleteRepository
 {

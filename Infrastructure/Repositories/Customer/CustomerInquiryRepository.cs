@@ -1,6 +1,6 @@
 using Application.Customer.Inquiry;
 
-namespace Infrastructure.Repository.Customer;
+namespace Infrastructure.Repositories.Customer;
 
 public class CustomerInquiryRepository(SqlContext sqlContext) : ICustomerInquiryRepository
 {

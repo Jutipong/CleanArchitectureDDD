@@ -1,6 +1,6 @@
 using Application.Customer.GetById;
 
-namespace Infrastructure.Repository.Customer;
+namespace Infrastructure.Repositories.Customer;
 
 public class CustomerGetByIdRepository(SqlContext sqlContext) : ICustomerGetByIdRepository
 {

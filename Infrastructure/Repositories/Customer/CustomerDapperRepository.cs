@@ -2,7 +2,7 @@ using Application.Customer.Dapper;
 using Dapper;
 using Infrastructure.Abstractions.Dapper;
 
-namespace Infrastructure.Repository.Customer;
+namespace Infrastructure.Repositories.Customer;
 
 public class CustomerDapperRepository(IDapperConnection dapperContext, SqlContext sqlContext) : ICustomerDapperRepository
 {

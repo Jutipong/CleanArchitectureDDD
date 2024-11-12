@@ -1,6 +1,6 @@
 using Application.Customer.Create;
 
-namespace Infrastructure.Repository.Customer;
+namespace Infrastructure.Repositories.Customer;
 
 public class CustomerCreateRepository(SqlContext sqlContext) : ICustomerCreateRepository
 {

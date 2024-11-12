@@ -1,7 +1,7 @@
 using Application.Customer.Autocomplete;
 using Infrastructure.Extensions;
 
-namespace Infrastructure.Repository.Customer;
+namespace Infrastructure.Repositories.Customer;
 
 public class CustomerAutocompleteRepository(SqlContext sqlContext) : ICustomerAutocompleteRepository
 {

@@ -1,6 +1,6 @@
 using Application.Customer.Update;
 
-namespace Infrastructure.Repository.Customer;
+namespace Infrastructure.Repositories.Customer;
 
 internal class CustomerUpdateRepository(SqlContext sqlContext) : ICustomerUpdateRepository
 {

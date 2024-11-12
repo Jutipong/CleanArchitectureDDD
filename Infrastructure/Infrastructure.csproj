@@ -8,8 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Repository\CustomerRepository.cs" />
-	  <Compile Remove="Repository\RepositoryBase.cs" />
+	  <Compile Remove="Repositories\CustomerRepository.cs" />
+	  <Compile Remove="Repositories\RepositoryBase.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
