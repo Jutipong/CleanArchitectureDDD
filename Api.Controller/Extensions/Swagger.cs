@@ -62,11 +62,10 @@ public static class Swagger
             {
                 // For use Controller
                 c.TagActionsBy(api =>
-                    api.GroupName != null
-                        ? [api.GroupName]
-                        : api.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
-                            ? (IList<string>)[controllerActionDescriptor.ControllerName]
-                            : throw new InvalidOperationException("Unable to determine tag for endpoint.")
+                    api.GroupName != null ? [api.GroupName]
+                    : api.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
+                        ? (IList<string>)[controllerActionDescriptor.ControllerName]
+                    : throw new InvalidOperationException("Unable to determine tag for endpoint.")
                 );
 
                 c.DocInclusionPredicate((_, _) => true);
@@ -75,10 +74,7 @@ public static class Swagger
 
         return services;
     }
-}
 
-internal static partial class ApplicationBuilder
-{
     public static IApplicationBuilder UseSwaggerEndpoints(this IApplicationBuilder app)
     {
         app.UseSwagger();

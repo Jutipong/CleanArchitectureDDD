@@ -1,17 +1,15 @@
 using Api.Minimal.Extensions;
 using Api.Minimal.Middleware;
 using Application;
-using Domain.Abstractions;
 using Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var appConfig = builder.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
-builder.Services.AddSingleton(appConfig);
+builder.AddAppSetting();
+builder.AddCorsPolicy();
 
 builder.Services.AddSwagger();
-builder.Services.AddCorsPolicy(builder.Configuration);
 builder.Services.AddCarter();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);

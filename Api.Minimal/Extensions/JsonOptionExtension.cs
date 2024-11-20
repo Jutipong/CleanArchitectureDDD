@@ -1,6 +1,8 @@
-namespace Api.Controller.Extensions;
+using Api.Minimal.Extensions;
 
-public static class SerializeOption
+namespace Api.Minimal.Extensions;
+
+public static class JsonOptionExtension
 {
     public static void AddJsonOptions(this IServiceCollection services)
     {

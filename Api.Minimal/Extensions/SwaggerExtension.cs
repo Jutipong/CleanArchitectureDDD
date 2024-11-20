@@ -1,20 +1,22 @@
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 
 namespace Api.Minimal.Extensions;
 
-public static class Swagger
+public static class SwaggerExtension
 {
-    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    public static IServiceCollection AddSwagger(this IServiceCollection services, bool isControllerApi = false)
     {
         services.AddEndpointsApiExplorer();
+
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc(
                 "v1",
                 new OpenApiInfo
                 {
-                    Description = "Minimal API Demo",
-                    Title = "Minimal API Demo",
+                    Description = "Controller API Demo",
+                    Title = "Controller API Demo",
                     Version = "v1",
                     Contact = new OpenApiContact
                     {
@@ -23,6 +25,7 @@ public static class Swagger
                     },
                 }
             );
+
             c.AddSecurityDefinition(
                 "Bearer",
                 new OpenApiSecurityScheme
@@ -38,6 +41,7 @@ public static class Swagger
                         + "Example: Bearer token",
                 }
             );
+
             c.AddSecurityRequirement(
                 new OpenApiSecurityRequirement
                 {
@@ -53,17 +57,28 @@ public static class Swagger
                     },
                 }
             );
+
+            if (isControllerApi)
+            {
+                // For use Controller
+                c.TagActionsBy(api =>
+                    api.GroupName != null ? [api.GroupName]
+                    : api.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
+                        ? (IList<string>)[controllerActionDescriptor.ControllerName]
+                    : throw new InvalidOperationException("Unable to determine tag for endpoint.")
+                );
+
+                c.DocInclusionPredicate((_, _) => true);
+            }
         });
 
         return services;
     }
-}
 
-internal static partial class ApplicationBuilder
-{
     public static IApplicationBuilder UseSwaggerEndpoints(this IApplicationBuilder app)
     {
         app.UseSwagger();
+
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
