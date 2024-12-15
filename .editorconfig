@@ -9,7 +9,7 @@ tab_width = 4
 indent_style = space
 insert_final_newline = false
 trim_trailing_whitespace = true
-end_of_line = lf
+end_of_line = crlf
 
 dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 dotnet_style_prefer_compound_assignment = true:suggestion
@@ -828,3 +828,5 @@ tab_width = 2
 
 [{**/Entities/**,**/**/SqlServer/**}]
 dotnet_diagnostic.IDE0005.severity = none
+dotnet_diagnostic.IDE0130.severity = none
+dotnet_diagnostic.CS8618.severity = none
